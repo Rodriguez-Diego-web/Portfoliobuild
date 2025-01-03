@@ -41,32 +41,38 @@ const Projects = () => {
         {
           title: 'Frebo Media',
           url: 'https://frebo-media.netlify.app',
-          description: 'Media company website'
+          description: 'Media company website with advanced CMS integration, featuring dynamic content management, multimedia galleries, and responsive design.',
+          tech: ['Next.js', 'Tailwind CSS', 'Sanity CMS']
         },
         {
           title: 'Fleyver',
           url: 'https://fleyver.netlify.app',
-          description: 'Food delivery platform'
+          description: 'Modern clothing brand platform with integrated CMS, featuring e-commerce functionality, inventory management, and seamless user experience.',
+          tech: ['React', 'Node.js', 'MongoDB']
         },
         {
           title: 'CUX Snack',
           url: 'https://cuxsnack.netlify.app',
-          description: 'Food ordering system'
+          description: 'Innovative snack ordering system with real-time tracking, inventory management, and integrated CMS for menu updates.',
+          tech: ['MERN Stack', 'Socket.io']
         },
         {
           title: 'Global Connect',
           url: 'https://globalconnectrodriguez.netlify.app',
-          description: 'International business platform'
+          description: 'International business networking platform with multilingual support and advanced search capabilities.',
+          tech: ['Next.js', 'GraphQL', 'PostgreSQL']
         },
         {
           title: 'City Share',
           url: 'https://cityshare.netlify.app',
-          description: 'Urban mobility solution'
+          description: 'Urban mobility solution with real-time vehicle tracking and integrated payment processing.',
+          tech: ['React Native', 'Express', 'MongoDB']
         },
         {
           title: 'Pizza Galaxy',
           url: 'https://pizzagalaxycux.netlify.app',
-          description: 'Pizza ordering system'
+          description: 'Modern pizza ordering system with CMS-powered menu management and real-time order tracking.',
+          tech: ['MERN Stack', 'Redux']
         }
       ]
     },
