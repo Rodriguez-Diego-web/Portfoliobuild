@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="circuit" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M0 0h20v20H0z" fill="none"/>
+      <path d="M3 3h2v2H3z M15 3h2v2h-2z M3 15h2v2H3z M15 15h2v2h-2z" fill="#f97316"/>
+      <path d="M5 5h10v1H5z M5 14h10v1H5z M14 5v9h1V5z M5 5v9h1V5z" fill="#f97316" opacity="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="100" height="100" fill="url(#circuit)"/>
+</svg>

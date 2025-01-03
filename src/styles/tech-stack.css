@@ -1,0 +1,180 @@
+.perspective {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  overscroll-behavior: none;
+  touch-action: none;  /* Verhindert Standard-Touch-Verhalten */
+}
+
+.tech-stack-container {
+  position: relative;
+  overflow-anchor: none;
+  scroll-behavior: auto;
+  overscroll-behavior: none;
+  touch-action: pan-x pan-y;
+}
+
+.tech-card {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.tech-card.flipped .tech-card-front {
+  transform: rotateY(180deg);
+}
+
+.tech-card.flipped .tech-card-back {
+  transform: rotateY(0deg);
+}
+
+.tech-card.completed {
+  animation: float 3s ease-in-out infinite;
+}
+
+.tech-card.completed .tech-card-front {
+  transform: rotateY(180deg);
+}
+
+.tech-card.completed .tech-card-back {
+  transform: rotateY(0deg);
+}
+
+.tech-card.completed::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(45deg, #f97316, #fb923c, #fdba74, #f97316);
+  filter: blur(5px);
+  z-index: -1;
+  animation: glowPulse 2s ease-in-out infinite;
+  border-radius: 1rem;
+}
+
+.tech-card.locked {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.tech-card-front,
+.tech-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 1rem;
+  background-color: #1a1a1a;
+}
+
+.tech-card-front {
+  transform: rotateY(0deg);
+}
+
+.tech-card-back {
+  transform: rotateY(180deg);
+}
+
+.tech-icon-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  pointer-events: none;
+}
+
+.tech-icon-wrapper {
+  display: inline-block;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.tech-icon {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+.tilt-effect {
+  transform-style: preserve-3d;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  pointer-events: none;
+}
+
+.completed-set {
+  position: relative;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 1rem;
+  background: rgba(249, 115, 22, 0.1);
+  border: 1px solid rgba(249, 115, 22, 0.2);
+}
+
+.completed-set::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(45deg, #f97316, #fb923c, #fdba74, #f97316);
+  filter: blur(3px);
+  z-index: -1;
+  border-radius: 1rem;
+  opacity: 0.5;
+}
+
+/* Prevent text selection */
+.tech-card * {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Scrollbar für overflow */
+.tech-card-back::-webkit-scrollbar {
+  width: 4px;
+}
+
+.tech-card-back::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.tech-card-back::-webkit-scrollbar-thumb {
+  background: rgba(255, 140, 0, 0.5);
+  border-radius: 2px;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes glowPulse {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="firebase" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M20 10l5 25L15 25z" fill="none" stroke="#f97316" stroke-width="1" opacity="0.3"/>
+      <path d="M20 10l10 10-15 5z" fill="none" stroke="#f97316" stroke-width="1" opacity="0.5"/>
+      <circle cx="20" cy="10" r="2" fill="#f97316"/>
+    </pattern>
+  </defs>
+  <rect width="100" height="100" fill="url(#firebase)"/>
+</svg>
