@@ -20,6 +20,13 @@ import roomies4Img from '/src/assets/Public/roomies-4.png';
 import renderingImg1 from '/src/assets/Public/3d/Bildschirmfoto 2024-07-12 um 14.15.21 (2).png';
 import renderingImg2 from '/src/assets/Public/3d/Bildschirmfoto 2024-07-12 um 14.15.26.png';
 import renderingImg3 from '/src/assets/Public/3d/Bildschirmfoto 2024-07-12 um 14.15.34.png';
+import render3dMain from '/src/assets/Public/3d/Bildschirmfoto 2024-07-14 um 00.14.40.png';
+import render3d1 from '/src/assets/Public/3d/Bildschirmfoto 2024-07-12 um 21.10.22.png';
+import render3d2 from '/src/assets/Public/3d/Bildschirmfoto 2024-07-12 um 21.10.54.png';
+import render3d3 from '/src/assets/Public/3d/Bildschirmfoto 2024-07-12 um 21.11.17.png';
+import render3d4 from '/src/assets/Public/3d/Bildschirmfoto 2024-07-12 um 14.15.50.png';
+import render3d5 from '/src/assets/Public/3d/Bildschirmfoto 2024-07-12 um 19.05.42.png';
+import render3d6 from '/src/assets/Public/3d/bild1.png';
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
@@ -77,6 +84,80 @@ const Projects = () => {
       ]
     },
     {
+      title: '3D Visualization',
+      description: 'Eine Sammlung fotorealistischer 3D-Visualisierungen, die fortgeschrittene Beleuchtungstechniken, Materialgestaltung und atmosphärische Effekte demonstriert. Das Projekt zeigt meine Fähigkeiten in der 3D-Modellierung, Texturierung und Rendering-Optimierung.',
+      image: render3dMain,
+      images: [
+        render3dMain,
+        render3d1,
+        render3d2,
+        render3d3,
+        render3d4,
+        render3d5,
+        render3d6
+      ],
+      tech: ['Blender', '3D Modeling', 'Texturing', 'Lighting', 'Rendering'],
+      youtubeEmbeds: [
+        'https://www.youtube.com/embed/ynx2wpAQqnI',
+        'https://www.youtube.com/embed/PeNQpLT9dbw',
+        'https://www.youtube.com/embed/U7ku5W2hvkM',
+        'https://www.youtube.com/embed/7VTaPGyd-QI'
+      ],
+      imagesAndVideos: [
+        {
+          type: 'image',
+          url: render3dMain
+        },
+        {
+          type: 'image',
+          url: render3d1
+        },
+        {
+          type: 'image',
+          url: render3d2
+        },
+        {
+          type: 'image',
+          url: render3d3
+        },
+        {
+          type: 'image',
+          url: render3d4
+        },
+        {
+          type: 'image',
+          url: render3d5
+        },
+        {
+          type: 'image',
+          url: render3d6
+        },
+        {
+          type: 'video',
+          url: 'https://www.youtube.com/embed/ynx2wpAQqnI'
+        },
+        {
+          type: 'video',
+          url: 'https://www.youtube.com/embed/PeNQpLT9dbw'
+        },
+        {
+          type: 'video',
+          url: 'https://www.youtube.com/embed/U7ku5W2hvkM'
+        },
+        {
+          type: 'video',
+          url: 'https://www.youtube.com/embed/7VTaPGyd-QI'
+        }
+      ]
+    },
+    {
+      title: '3D Tiny World Showcase',
+      description: 'A charming 3D animated island scene created in Blender, featuring a cozy dog house, playful fish animations, and a peaceful atmosphere. This project demonstrates skills in 3D modeling, animation, and environmental design.',
+      image: 'https://images.unsplash.com/photo-1620428268482-cf1851a36764?auto=format&fit=crop&q=80&w=1200&h=800',
+      tech: ['Blender', '3D Animation', 'Environmental Design'],
+      videoUrl: 'https://www.youtube.com/embed/dGJBykjIYl0'
+    },
+    {
       title: 'How We Treat Animals',
       description: 'A powerful visual narrative exploring the relationship between humans and animals, highlighting important ethical considerations in animal treatment.',
       image: cloudinaryUrls.Angel,
@@ -91,13 +172,6 @@ const Projects = () => {
       tech: ['Photography', 'Video Production', 'Visual Storytelling']
     },
     {
-      title: '3D Tiny World Showcase',
-      description: 'A charming 3D animated island scene created in Blender, featuring a cozy dog house, playful fish animations, and a peaceful atmosphere. This project demonstrates skills in 3D modeling, animation, and environmental design.',
-      image: 'https://images.unsplash.com/photo-1620428268482-cf1851a36764?auto=format&fit=crop&q=80&w=1200&h=800',
-      tech: ['Blender', '3D Animation', 'Environmental Design'],
-      videoUrl: 'https://www.youtube.com/embed/dGJBykjIYl0'
-    },
-    {
       title: 'AVM - Audiovisual Media',
       description: 'A collection of audiovisual media projects showcasing digital art, motion graphics, and experimental video work. Features creative manipulations, 2D animations, and innovative visual storytelling techniques.',
       image: 'https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&q=80&w=2000&h=1200',
@@ -107,19 +181,6 @@ const Projects = () => {
         'https://www.youtube.com/embed/VT7WoNbiYB0',
         'https://www.youtube.com/embed/TRuDKkB8NXg',
         'https://www.youtube.com/embed/HY2rGL84hwg'
-      ]
-    },
-    {
-      title: '3D Visualization',
-      description: 'Architectural visualization and 3D modeling projects showcasing spatial design and attention to detail.',
-      image: renderingImg1,
-      images: [renderingImg1, renderingImg2, renderingImg3],
-      tech: ['3D Modeling', 'Rendering', 'Architecture'],
-      youtubeEmbeds: [
-        'https://www.youtube.com/embed/ynx2wpAQqnI',
-        'https://www.youtube.com/embed/PeNQpLT9dbw',
-        'https://www.youtube.com/embed/U7ku5W2hvkM',
-        'https://www.youtube.com/embed/7VTaPGyd-QI'
       ]
     },
     {
@@ -140,7 +201,7 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="py-20 bg-gray-50 dark:bg-black transition-colors duration-300">
+    <div id="projects" className="py-20 bg-gray-50 dark:bg-black transition-colors duration-300">
       <div className="container mx-auto px-4">
         <h2 className="text-center text-2xl lg:text-4xl font-bold mb-8 lg:mb-16">
           Selected Projects
@@ -150,7 +211,11 @@ const Projects = () => {
             <div
               key={index}
               className="bg-white dark:bg-dark-200 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 hover:border-accent-400 dark:hover:border-accent-400/50 transition-colors cursor-pointer group"
-              onClick={() => setSelectedProject(index)}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setSelectedProject(index);
+              }}
             >
               <div className="relative aspect-video">
                 <img
@@ -192,7 +257,7 @@ const Projects = () => {
           project={projects[selectedProject]}
         />
       )}
-    </section>
+    </div>
   );
 };
 
