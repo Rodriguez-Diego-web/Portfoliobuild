@@ -81,6 +81,7 @@ const Contact = () => {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="relative">
+                    <label htmlFor="name" className="sr-only">Name</label>
                     <input
                       type="text"
                       name="name"
@@ -94,6 +95,7 @@ const Contact = () => {
                     />
                   </div>
                   <div className="relative">
+                    <label htmlFor="email" className="sr-only">Email</label>
                     <input
                       type="email"
                       name="email"
@@ -108,6 +110,7 @@ const Contact = () => {
                   </div>
                 </div>
                 <div className="relative">
+                  <label htmlFor="subject" className="sr-only">Subject</label>
                   <input
                     type="text"
                     name="subject"
@@ -121,6 +124,7 @@ const Contact = () => {
                   />
                 </div>
                 <div className="relative">
+                  <label htmlFor="message" className="sr-only">Message</label>
                   <textarea
                     name="message"
                     id="message"

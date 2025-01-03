@@ -459,6 +459,7 @@ const Hero = () => {
 
             {/* Input Line */}
             <form onSubmit={handleSubmit} className="flex items-center mt-2">
+              <label htmlFor="terminal-input" className="sr-only">Terminal command input</label>
               <span className="text-green-500 mr-2 text-xs sm:text-sm">➜</span>
               <span className="text-blue-500 mr-2 text-xs sm:text-sm hidden sm:inline">{currentDirectory}</span>
               <span className="text-green-500 mr-2 text-xs sm:text-sm">$</span>
