@@ -28,6 +28,44 @@ Ein einzigartiges, terminal-inspiriertes Portfolio mit interaktiven Elementen un
 - Minimalistisches, aber effektives Design
 - Professionelle Projektgalerie
 
+## 🌟 Featured Projects
+
+### 🎥 Frebo Media
+- Professionelle Media-Company-Website
+- Vollständiges Content Management System
+- Moderne UI/UX mit responsivem Design
+- Tech Stack: Next.js, Tailwind CSS, Sanity CMS
+
+### 👕 Fleyver
+- E-Commerce-Plattform für Modemarke
+- Integriertes CMS für Produktverwaltung
+- Benutzerfreundliches Shopping-Erlebnis
+- Tech Stack: React, Node.js, MongoDB
+
+### 🍿 CUX Snack
+- Innovatives Snack-Bestellsystem
+- Echtzeit-Bestellverfolgung
+- Integriertes Inventarmanagement
+- Tech Stack: MERN Stack, Socket.io
+
+### 🌍 Global Connect
+- Internationale Business-Networking-Plattform
+- Mehrsprachige Unterstützung
+- Erweiterte Suchfunktionen
+- Tech Stack: Next.js, GraphQL, PostgreSQL
+
+### 🚗 City Share
+- Urban Mobility Solution
+- Echtzeit-Fahrzeugverfügbarkeit
+- Integrierte Zahlungsabwicklung
+- Tech Stack: React Native, Express, MongoDB
+
+### 🍕 Pizza Galaxy
+- Modernes Pizza-Bestellsystem
+- Dynamische Menüverwaltung via CMS
+- Bestellverfolgung in Echtzeit
+- Tech Stack: MERN Stack, Redux
+
 ## Technologie-Stack
 
 ### Frontend
@@ -90,17 +128,19 @@ yarn build
 Die Website ist deployed auf Netlify:
 [rodriguez-digital.de](https://rodriguez-digital.de)
 
-## Kontakt
+## 📄 Lizenz
+
+© 2024 Kadir Diego Padin Rodriguez. Alle Rechte vorbehalten.
+
+Dieses Portfolio und alle seine Inhalte sind urheberrechtlich geschützt. Eine Vervielfältigung oder Weitergabe ist ohne ausdrückliche schriftliche Genehmigung nicht gestattet.
+
+## 📞 Kontakt
 
 Kadir Diego Padin Rodriguez
 - Email: diego@rodriguez-digital.de
 - Website: [rodriguez-digital.de](https://rodriguez-digital.de)
 - GitHub: [@Kadirdiegp](https://github.com/Kadirdiegp)
 - Instagram: [@kadirdiego_](https://instagram.com/kadirdiego_)
-
-## Lizenz
-
-Dieses Projekt ist unter der MIT-Lizenz lizenziert. Siehe [LICENSE](LICENSE) für weitere Informationen.
 
 ## Danksagungen
 
