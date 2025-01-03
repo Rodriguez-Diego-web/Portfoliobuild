@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, FocusEvent } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
@@ -50,6 +50,17 @@ const Contact = () => {
     }));
   };
 
+  const handleFocus = (e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    // Prevent scroll on iOS Safari
+    setTimeout(() => {
+      const viewHeight = window.innerHeight;
+      const elementTop = e.target.getBoundingClientRect().top;
+      if (elementTop > viewHeight * 0.5) {
+        e.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 0);
+  };
+
   const contactInfo = [
     {
       Icon: Mail,
@@ -91,6 +102,7 @@ const Contact = () => {
                       id="name"
                       value={formData.name}
                       onChange={handleChange}
+                      onFocus={handleFocus}
                       placeholder="Your Name"
                       required
                       autoComplete="name"
@@ -105,6 +117,7 @@ const Contact = () => {
                       id="email"
                       value={formData.email}
                       onChange={handleChange}
+                      onFocus={handleFocus}
                       placeholder="Your Email"
                       required
                       autoComplete="email"
@@ -120,6 +133,7 @@ const Contact = () => {
                     id="subject"
                     value={formData.subject}
                     onChange={handleChange}
+                    onFocus={handleFocus}
                     placeholder="Subject"
                     required
                     autoComplete="off"
@@ -133,6 +147,7 @@ const Contact = () => {
                     id="message"
                     value={formData.message}
                     onChange={handleChange}
+                    onFocus={handleFocus}
                     placeholder="Your Message"
                     required
                     rows={6}
