@@ -4,7 +4,7 @@ import { Menu } from 'lucide-react';
 import { Link } from 'react-scroll';
 import NavLinks from './NavLinks';
 
-const Header = () => {
+const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -44,9 +44,9 @@ const Header = () => {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="md:hidden"
+              className="md:hidden bg-dark-200/95 mt-2 rounded-lg"
             >
-              <div className="py-2 space-y-2">
+              <div className="py-2">
                 <NavLinks mobile setIsOpen={setIsOpen} />
               </div>
             </motion.div>

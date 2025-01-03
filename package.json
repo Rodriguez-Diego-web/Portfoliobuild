@@ -11,12 +11,14 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.2.0",
+    "@types/react-scroll": "^1.8.10",
     "cloudinary": "^2.5.1",
     "framer-motion": "^11.15.0",
     "lucide-react": "^0.344.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-intersection-observer": "^9.8.1",
+    "react-scroll": "^1.9.0",
     "sharp": "^0.33.5"
   },
   "devDependencies": {
