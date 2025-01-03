@@ -16,6 +16,9 @@ const Contact = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if ('activeElement' in document) {
+      (document.activeElement as HTMLElement)?.blur();
+    }
     setIsSubmitting(true);
     
     try {

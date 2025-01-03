@@ -1,0 +1,28 @@
+/* Prevent iOS Safari from automatically scrolling when focusing inputs */
+html {
+  height: -webkit-fill-available;
+}
+
+body {
+  min-height: -webkit-fill-available;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent pull-to-refresh and overscroll behavior */
+body {
+  overscroll-behavior-y: none;
+}
+
+/* Fix for iOS Safari viewport height */
+.min-h-screen {
+  min-height: -webkit-fill-available;
+}
+
+/* Ensure smooth scrolling on iOS */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
