@@ -5,9 +5,6 @@ html {
 
 body {
   min-height: -webkit-fill-available;
-  position: fixed;
-  width: 100%;
-  height: 100%;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -25,4 +22,9 @@ body {
 /* Ensure smooth scrolling on iOS */
 * {
   -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent unwanted scroll adjustments when focusing inputs */
+input, textarea {
+  font-size: 16px; /* Prevents zoom on focus */
 }
