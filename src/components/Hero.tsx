@@ -473,6 +473,10 @@ const Hero = () => {
                 autoFocus
                 autoCapitalize="none"
                 autoCorrect="off"
+                id="terminal-input"
+                name="terminal-input"
+                autoComplete="off"
+                aria-label="Terminal input"
               />
             </form>
           </div>

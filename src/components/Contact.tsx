@@ -84,10 +84,12 @@ const Contact = () => {
                     <input
                       type="text"
                       name="name"
+                      id="name"
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="Your Name"
                       required
+                      autoComplete="name"
                       className="w-full px-4 py-3 bg-white dark:bg-dark-200 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-accent-400"
                     />
                   </div>
@@ -95,10 +97,12 @@ const Contact = () => {
                     <input
                       type="email"
                       name="email"
+                      id="email"
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="Your Email"
                       required
+                      autoComplete="email"
                       className="w-full px-4 py-3 bg-white dark:bg-dark-200 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-accent-400"
                     />
                   </div>
@@ -107,21 +111,25 @@ const Contact = () => {
                   <input
                     type="text"
                     name="subject"
+                    id="subject"
                     value={formData.subject}
                     onChange={handleChange}
                     placeholder="Subject"
                     required
+                    autoComplete="off"
                     className="w-full px-4 py-3 bg-white dark:bg-dark-200 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-accent-400"
                   />
                 </div>
                 <div className="relative">
                   <textarea
                     name="message"
+                    id="message"
                     value={formData.message}
                     onChange={handleChange}
                     placeholder="Your Message"
                     required
                     rows={6}
+                    autoComplete="off"
                     className="w-full px-4 py-3 bg-white dark:bg-dark-200 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-accent-400 resize-none"
                   ></textarea>
                 </div>
