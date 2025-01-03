@@ -469,7 +469,7 @@ const Hero = () => {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                className="flex-1 bg-transparent outline-none text-green-500 text-xs sm:text-sm min-w-0"
+                className="flex-1 bg-transparent outline-none text-green-500 text-base min-w-0"
                 spellCheck="false"
                 autoFocus
                 autoCapitalize="none"

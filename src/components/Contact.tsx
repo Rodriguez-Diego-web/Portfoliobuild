@@ -91,7 +91,7 @@ const Contact = () => {
                       placeholder="Your Name"
                       required
                       autoComplete="name"
-                      className="w-full px-4 py-3 bg-white dark:bg-dark-200 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-accent-400"
+                      className="w-full px-4 py-3 bg-white dark:bg-dark-200 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-accent-400 text-base"
                     />
                   </div>
                   <div className="relative">
@@ -105,7 +105,7 @@ const Contact = () => {
                       placeholder="Your Email"
                       required
                       autoComplete="email"
-                      className="w-full px-4 py-3 bg-white dark:bg-dark-200 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-accent-400"
+                      className="w-full px-4 py-3 bg-white dark:bg-dark-200 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-accent-400 text-base"
                     />
                   </div>
                 </div>
@@ -120,7 +120,7 @@ const Contact = () => {
                     placeholder="Subject"
                     required
                     autoComplete="off"
-                    className="w-full px-4 py-3 bg-white dark:bg-dark-200 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-accent-400"
+                    className="w-full px-4 py-3 bg-white dark:bg-dark-200 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-accent-400 text-base"
                   />
                 </div>
                 <div className="relative">
@@ -134,7 +134,7 @@ const Contact = () => {
                     required
                     rows={6}
                     autoComplete="off"
-                    className="w-full px-4 py-3 bg-white dark:bg-dark-200 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-accent-400 resize-none"
+                    className="w-full px-4 py-3 bg-white dark:bg-dark-200 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-accent-400 resize-none text-base"
                   ></textarea>
                 </div>
                 <motion.button
