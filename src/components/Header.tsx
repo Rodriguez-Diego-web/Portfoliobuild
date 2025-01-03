@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu } from 'lucide-react';
 import { Link } from 'react-scroll';
 import NavLinks from './NavLinks';
+import logo from '../assets/LOGO RODRIGUEZ_.png';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,9 +18,9 @@ const Header: React.FC = () => {
             smooth={true}
             offset={-100}
             duration={500}
-            className="text-xl font-bold text-accent-400 cursor-pointer"
+            className="cursor-pointer"
           >
-            Port<span className="text-light-900">folio</span>
+            <img src={logo} alt="Rodriguez Logo" className="h-12 w-auto" />
           </Link>
 
           {/* Mobile menu button */}
