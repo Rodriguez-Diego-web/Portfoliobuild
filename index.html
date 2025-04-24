@@ -2,11 +2,11 @@
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/icons/icon-192x192.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://rsms.me; img-src 'self' data: https:; font-src 'self' https://rsms.me; connect-src 'self' https://www.google-analytics.com;">
+    <!-- Entferne die CSP, da sie möglicherweise mit Netlify-Settings in Konflikt steht -->
     <meta name="description" content="Diego Rodriguez - Full-Stack Web Developer aus Deutschland. Expertise in React, TypeScript, TailwindCSS und modernen Web-Technologien für responsive, nutzerfreundliche Websites und Webanwendungen." />
     <meta name="keywords" content="Webentwickler, Web Developer, Web-Entwicklung, Frontend, Backend, React, TypeScript, TailwindCSS, JavaScript, Portfolio, Responsive Design, Webdesign, Deutschland, Webanwendungen, UI Design, UX Design, Mobile First, SEO, moderne Webseiten" />
     <meta name="author" content="Diego Rodriguez" />
@@ -20,7 +20,7 @@
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Diego Rodriguez" />
-    <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.svg" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -37,14 +37,16 @@
     <meta property="twitter:description" content="Portfolio von Diego Rodriguez, spezialisiert auf moderne Frontend- und Backend-Entwicklung, responsive Websites und Web-Anwendungen mit React, TypeScript und TailwindCSS." />
     <meta property="twitter:image" content="https://rodriguez-digital.de/og-image.jpg" />
     
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B2RP0YQF67"></script>
+    <!-- Google Analytics direkt inline -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-B2RP0YQF67');
+      
+      // Manueller Tracking-Pixel für Analytics als Fallback
+      const img = new Image();
+      img.src = 'https://www.google-analytics.com/collect?v=2&tid=G-B2RP0YQF67&cid=555&t=pageview&dl=' + encodeURIComponent(window.location.href);
     </script>
     
     <!-- Strukturierte Daten (JSON-LD) für bessere Suchmaschinenindexierung -->
