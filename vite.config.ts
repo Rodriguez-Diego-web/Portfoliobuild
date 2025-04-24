@@ -16,8 +16,8 @@ export default defineConfig({
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: true,
-        drop_debugger: true
+        drop_console: false, // Aktiviere Konsolenausgaben für Debugging
+        drop_debugger: false
       }
     },
     rollupOptions: {
@@ -25,6 +25,9 @@ export default defineConfig({
         manualChunks: {
           vendor: ['react', 'react-dom'],
         },
+        entryFileNames: 'assets/[name].[hash].js', // Eindeutige Namen für JS-Dateien
+        chunkFileNames: 'assets/[name].[hash].js',
+        assetFileNames: 'assets/[name].[hash].[ext]'
       },
     },
     chunkSizeWarningLimit: 1000
