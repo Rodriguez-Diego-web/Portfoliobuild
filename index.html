@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Direkte CSP-Implementation für Google Analytics -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.google-analytics.com; script-src-elem 'unsafe-inline' https://www.googletagmanager.com https://*.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://region1.google-analytics.com https://analytics.google.com; img-src 'self' data: https://*.google-analytics.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline';">
+    <!-- CSP und Google Analytics vorübergehend entfernt, um grundlegende Funktionalität wiederherzustellen -->
     <meta name="description" content="Diego Rodriguez - Full-Stack Web Developer aus Deutschland. Expertise in React, TypeScript, TailwindCSS und modernen Web-Technologien für responsive, nutzerfreundliche Websites und Webanwendungen." />
     <meta name="keywords" content="Webentwickler, Web Developer, Web-Entwicklung, Frontend, Backend, React, TypeScript, TailwindCSS, JavaScript, Portfolio, Responsive Design, Webdesign, Deutschland, Webanwendungen, UI Design, UX Design, Mobile First, SEO, moderne Webseiten" />
     <meta name="author" content="Diego Rodriguez" />
@@ -37,18 +36,6 @@
     <meta property="twitter:title" content="Diego Rodriguez | Web Developer &amp; Frontend-Spezialist" />
     <meta property="twitter:description" content="Portfolio von Diego Rodriguez, spezialisiert auf moderne Frontend- und Backend-Entwicklung, responsive Websites und Web-Anwendungen mit React, TypeScript und TailwindCSS." />
     <meta property="twitter:image" content="https://rodriguez-digital.de/og-image.jpg" />
-    
-    <!-- Google Analytics direkt inline -->
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-B2RP0YQF67');
-      
-      // Manueller Tracking-Pixel für Analytics als Fallback
-      const img = new Image();
-      img.src = 'https://www.google-analytics.com/collect?v=2&tid=G-B2RP0YQF67&cid=555&t=pageview&dl=' + encodeURIComponent(window.location.href);
-    </script>
     
     <!-- Strukturierte Daten (JSON-LD) für bessere Suchmaschinenindexierung -->
     <script type="application/ld+json">
