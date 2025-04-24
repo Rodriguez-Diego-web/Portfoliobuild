@@ -1,0 +1,13 @@
+Du solltest hier zwei Icon-Dateien platzieren:
+
+1. icon-192x192.png (192x192 Pixel)
+2. icon-512x512.png (512x512 Pixel)
+
+Diese Icons werden für PWA-Funktionalität (Progressive Web App) benötigt und erscheinen, wenn Benutzer deine Website zum Homescreen hinzufügen.
+
+Du kannst einfache Icons mit deinen Initialen oder Logo erstellen mit Tools wie:
+- Figma
+- Adobe Illustrator
+- Oder Online-Tools wie Canva oder Iconscout
+
+Beide Dateien sollten das gleiche Design haben, nur in unterschiedlichen Größen.

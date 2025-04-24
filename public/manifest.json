@@ -1,0 +1,23 @@
+{
+  "name": "Diego Rodriguez | Web Developer Portfolio",
+  "short_name": "D.Rodriguez",
+  "description": "Portfolio von Diego Rodriguez, Web-Entwickler mit Fokus auf moderne Frontend- und Backend-Technologien",
+  "start_url": "https://rodriguez-digital.de/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#3b82f6",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

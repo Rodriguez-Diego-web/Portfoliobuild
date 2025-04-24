@@ -6,11 +6,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Modern Developer Portfolio</title>
+    <meta name="description" content="Diego Rodriguez - Web Developer Portfolio showcasing frontend and backend development skills, projects, and services." />
+    <meta name="keywords" content="web developer, portfolio, frontend, backend, react, typescript, tailwind, software engineer" />
+    <meta name="author" content="Diego Rodriguez" />
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#3b82f6" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Diego Rodriguez" />
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://rodriguez-digital.de/" />
+    <meta property="og:title" content="Diego Rodriguez | Web Developer Portfolio" />
+    <meta property="og:description" content="Web developer portfolio showcasing projects and skills in modern web technologies." />
+    <meta property="og:image" content="https://rodriguez-digital.de/og-image.jpg" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://rodriguez-digital.de/" />
+    <meta property="twitter:title" content="Diego Rodriguez | Web Developer Portfolio" />
+    <meta property="twitter:description" content="Web developer portfolio showcasing projects and skills in modern web technologies." />
+    <meta property="twitter:image" content="https://rodriguez-digital.de/og-image.jpg" />
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B2RP0YQF67"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-B2RP0YQF67');
+    </script>
+    
+    <!-- Strukturierte Daten (JSON-LD) für bessere Suchmaschinenindexierung -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Diego Rodriguez",
+      "url": "https://rodriguez-digital.de",
+      "image": "https://rodriguez-digital.de/profile-image.jpg",
+      "sameAs": [
+        "https://linkedin.com/in/diegorodriguezweb",
+        "https://github.com/Rodriguez-Diego-web"
+      ],
+      "jobTitle": "Web Developer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Freelance"
+      },
+      "description": "Web developer specializing in modern frontend and backend technologies.",
+      "knowsAbout": ["JavaScript", "TypeScript", "React", "Tailwind CSS", "Web Development"]
+    }
+    </script>
+    
+    <title>Diego Rodriguez | Web Developer Portfolio</title>
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Service Worker Registrierung -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+              console.log('ServiceWorker erfolgreich registriert: ', registration.scope);
+            })
+            .catch(error => {
+              console.log('ServiceWorker Registrierung fehlgeschlagen: ', error);
+            });
+        });
+      }
+    </script>
   </body>
 </html>
