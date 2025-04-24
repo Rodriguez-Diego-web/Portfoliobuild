@@ -1,12 +1,22 @@
 /*
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://*.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://region1.google-analytics.com https://analytics.google.com; img-src 'self' data: https://*.google-analytics.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline';
 
 /*.js
-  Content-Type: application/javascript
+  Content-Type: application/javascript; charset=utf-8
+
+/assets/*.js
+  Content-Type: application/javascript; charset=utf-8
+
+/assets/index-*.js
+  Content-Type: application/javascript; charset=utf-8
 
 /*.css
-  Content-Type: text/css
+  Content-Type: text/css; charset=utf-8
+
+/assets/*.css
+  Content-Type: text/css; charset=utf-8
 
 /*.html
-  Content-Type: text/html
+  Content-Type: text/html; charset=utf-8
