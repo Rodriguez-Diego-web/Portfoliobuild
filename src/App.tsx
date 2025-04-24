@@ -8,11 +8,12 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import TechStack from './components/TechStack';
 import WaveTransition from './components/WaveTransition';
+import Blog from './components/Blog/Blog';
 import SEO from './components/SEO';
 import { logPageView } from './utils/analytics';
 import './styles/terminal.css';
 
-type SectionId = 'hero' | 'about' | 'projects' | 'services' | 'contact';
+type SectionId = 'hero' | 'about' | 'projects' | 'services' | 'blog' | 'contact';
 
 function App() {
   const [isDark, setIsDark] = useState(true);
@@ -24,6 +25,7 @@ function App() {
     about: useRef<HTMLDivElement>(null),
     projects: useRef<HTMLDivElement>(null),
     services: useRef<HTMLDivElement>(null),
+    blog: useRef<HTMLDivElement>(null),
     contact: useRef<HTMLDivElement>(null)
   };
 
@@ -69,6 +71,7 @@ function App() {
           <div ref={sectionRefs.about}><About /></div>
           <div ref={sectionRefs.projects}><Projects /></div>
           <div ref={sectionRefs.services}><Services /></div>
+          <div ref={sectionRefs.blog}><Blog /></div>
           <div ref={sectionRefs.contact}><Contact /></div>
         </main>
         <Footer />
