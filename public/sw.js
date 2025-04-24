@@ -1,5 +1,5 @@
 // Service Worker Version
-const CACHE_VERSION = 'v1';
+const CACHE_VERSION = 'v2';
 const CACHE_NAME = `portfolio-cache-${CACHE_VERSION}`;
 
 // Dateien, die im Cache gespeichert werden sollen
@@ -7,9 +7,8 @@ const urlsToCache = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/404.html',
-  '/icons/icon-192x192.png',
-  '/icons/icon-512x512.png'
+  '/404.html'
+  // Wir lassen die Icons bewusst weg, bis sie erstellt wurden
 ];
 
 // Installation des Service Workers
@@ -19,6 +18,9 @@ self.addEventListener('install', (event) => {
       .then((cache) => {
         console.log('Cache geöffnet');
         return cache.addAll(urlsToCache);
+      })
+      .catch(error => {
+        console.error('Cache-Fehler beim Installieren:', error);
       })
   );
 });
@@ -42,6 +44,22 @@ self.addEventListener('activate', (event) => {
 
 // Abfangen von Fetch-Anfragen
 self.addEventListener('fetch', (event) => {
+  // Skip cross-origin requests
+  if (!event.request.url.startsWith(self.location.origin)) {
+    return;
+  }
+
+  // Skip Google Analytics requests
+  if (event.request.url.includes('google-analytics.com') || 
+      event.request.url.includes('googletagmanager.com')) {
+    return;
+  }
+
+  // Handle API requests
+  if (event.request.url.includes('/api/')) {
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
@@ -49,24 +67,39 @@ self.addEventListener('fetch', (event) => {
         if (response) {
           return response;
         }
-        return fetch(event.request).then(
-          (response) => {
-            // Prüfen, ob wir eine gültige Antwort bekommen haben
-            if(!response || response.status !== 200 || response.type !== 'basic') {
+
+        // Clone the request
+        const fetchRequest = event.request.clone();
+
+        return fetch(fetchRequest)
+          .then((response) => {
+            // Check if we received a valid response
+            if (!response || response.status !== 200 || response.type !== 'basic') {
               return response;
             }
 
-            // Antwort klonen (das Original wird für den Browser verwendet)
+            // Clone the response
             const responseToCache = response.clone();
+
+            // Don't cache non-GET requests
+            if (event.request.method !== 'GET') {
+              return response;
+            }
 
             caches.open(CACHE_NAME)
               .then((cache) => {
                 cache.put(event.request, responseToCache);
+              })
+              .catch(error => {
+                console.error('Fehler beim Cachen:', error);
               });
 
             return response;
-          }
-        );
+          })
+          .catch(error => {
+            console.error('Fetch-Fehler:', error);
+            // Optionally return a custom offline page here
+          });
       })
   );
 });

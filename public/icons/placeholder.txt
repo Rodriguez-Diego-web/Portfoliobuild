@@ -1,0 +1,17 @@
+Um die Icon-Fehler zu beheben, musst du zwei Icon-Dateien erstellen:
+
+1. icon-192x192.png (192x192 Pixel)
+2. icon-512x512.png (512x512 Pixel)
+
+Du hast mehrere Möglichkeiten:
+
+Option 1: Verwende ein Tool wie Canva, Figma oder Adobe Illustrator, um ein Logo zu erstellen
+
+Option 2: Erstelle ein einfaches Logo mit deinen Initialen "DR" in diesen Größen
+
+Option 3: Verwende einen Online-Generator wie https://realfavicongenerator.net/
+
+Die Icons sollten in diesem Verzeichnis platziert werden:
+/public/icons/
+
+Bis diese Icons erstellt sind, wird die PWA-Funktionalität deiner Website eingeschränkt sein.

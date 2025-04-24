@@ -2,35 +2,43 @@
   command = "npm run build"
   publish = "dist"
 
+[build.processing]
+  skip_processing = false
+[build.processing.css]
+  bundle = true
+  minify = true
+[build.processing.js]
+  bundle = true
+  minify = true
+[build.processing.html]
+  pretty_urls = true
+[build.processing.images]
+  compress = true
+
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
 [build.environment]
   NETLIFY_NEXT_PLUGIN_SKIP = "true"
 
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
 [[headers]]
   for = "/*"
   [headers.values]
     X-Frame-Options = "DENY"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
-    Content-Security-Policy = """
-      default-src 'self';
-      script-src 'self' 'unsafe-inline' 'unsafe-eval';
-      style-src 'self' 'unsafe-inline' https://rsms.me;
-      img-src 'self' data: https: blob:;
-      font-src 'self' data: https://rsms.me;
-      connect-src 'self' https:;
-      media-src 'self' https:;
-      object-src 'none';
-      frame-src 'self';
-      worker-src 'self' blob:;
-      """
-    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
     X-XSS-Protection = "1; mode=block"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://rsms.me; img-src 'self' data: https:; font-src 'self' https://rsms.me; connect-src 'self' https://www.google-analytics.com;"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Content-Type = "application/javascript"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Content-Type = "text/css"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
