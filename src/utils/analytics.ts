@@ -1,35 +1,43 @@
-import ReactGA from 'react-ga4';
+// Da Google Analytics bereits im HTML-Head initialisiert wird,
+// ist diese Datei nur ein Helper für zusätzliche Tracking-Funktionen
 
-// Replace this with your actual Google Analytics measurement ID
-const MEASUREMENT_ID = 'G-XXXXXXXXXX'; // <- Hier deine tatsächliche GA4 Measurement ID einsetzen (z.B. 'G-ABC123XYZ')
+// Type-Definition für globales gtag-Objekt
+declare global {
+  interface Window {
+    gtag: (command: string, action: string, params?: Record<string, unknown>) => void;
+  }
+}
 
 export const initGA = (): void => {
-  if (typeof window !== 'undefined') {
-    // Initialisiere Google Analytics mit deiner Measurement ID
-    ReactGA.initialize(MEASUREMENT_ID, {
-      testMode: import.meta.env.DEV // Nur Testmodus in der Entwicklungsumgebung
-    });
-    console.log('Google Analytics initialized with ID:', MEASUREMENT_ID);
+  // Da GA bereits im HTML initialisiert wird, tun wir hier nichts mehr
+  if (typeof window !== 'undefined' && import.meta.env.DEV) {
+    console.log('GA ist bereits im HTML initialisiert - JS-Initialisierung übersprungen');
   }
 };
 
+// Die folgenden Methoden sind Wrapper um die global verfügbaren gtag-Funktionen
 export const logPageView = (): void => {
-  ReactGA.send({ hitType: 'pageview', page: window.location.pathname + window.location.search });
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'page_view', {
+      page_path: window.location.pathname + window.location.search
+    });
+  }
 };
 
 export const logEvent = (category: string, action: string, label?: string): void => {
-  ReactGA.event({
-    category,
-    action,
-    label
-  });
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', action, {
+      event_category: category,
+      event_label: label
+    });
+  }
 };
 
 export const logException = (description: string, fatal = false): void => {
-  // Using event to log exceptions since exception method is not available in GA4
-  ReactGA.event({
-    category: 'Exception',
-    action: description,
-    label: fatal ? 'fatal' : 'non-fatal'
-  });
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'exception', {
+      description,
+      fatal
+    });
+  }
 };
