@@ -4,66 +4,122 @@ interface Directory {
   name: string;
   type: 'directory' | 'file';
   content?: { [key: string]: Directory };
+  parent?: Directory;
 }
 
 // Alle verfügbaren Befehle als Konstante für den Export
 export const AVAILABLE_COMMANDS = [
   'ls', 'cd', 'pwd', 'echo',
   'about', 'skills', 'projects', 'contact', 'social',
-  'neofetch', 'matrix', 'help', 'clear', 'snake',
-  'tetris', '2048'
+  'neofetch', 'matrix', 'help', 'clear', 'time', 'weather',
+  'snake', 'tetris', '2048'
 ] as const;
 
-// Dateisystem
-export const fileSystem: Directory = {
-  name: 'root',
-  type: 'directory',
-  content: {
-    'Documents': {
-      type: 'directory',
-      name: 'Documents',
-      content: {
-        'resume.pdf': { type: 'file', name: 'resume.pdf' },
-        'projects.md': { type: 'file', name: 'projects.md' }
-      }
-    },
-    'Games': {
-      type: 'directory',
-      name: 'Games',
-      content: {
-        'snake': { type: 'file', name: 'snake' },
-        'tetris': { type: 'file', name: 'tetris' },
-        '2048': { type: 'file', name: '2048' }
-      }
-    },
-    'Projects': {
-      type: 'directory',
-      name: 'Projects',
-      content: {
-        'portfolio': { type: 'directory', name: 'portfolio' },
-        'snake-game': { type: 'directory', name: 'snake-game' },
-        'tetris-game': { type: 'directory', name: 'tetris-game' }
-      }
-    }
-  }
+// Dateisystem erstellen mit Eltern-Referenzen
+export const initializeFileSystem = (): Directory => {
+  const root: Directory = {
+    name: 'root',
+    type: 'directory',
+    content: {}
+  };
+
+  const documents: Directory = {
+    name: 'Documents',
+    type: 'directory',
+    content: {},
+    parent: root
+  };
+  
+  const games: Directory = {
+    name: 'Games',
+    type: 'directory',
+    content: {},
+    parent: root
+  };
+
+  const projects: Directory = {
+    name: 'Projects',
+    type: 'directory',
+    content: {},
+    parent: root
+  };
+
+  // Dateisystem aufbauen
+  root.content!['Documents'] = documents;
+  root.content!['Games'] = games;
+  root.content!['Projects'] = projects;
+  root.content!['.gitignore'] = { type: 'file', name: '.gitignore', parent: root };
+  root.content!['portfolio.config.js'] = { type: 'file', name: 'portfolio.config.js', parent: root };
+  root.content!['README.md'] = { type: 'file', name: 'README.md', parent: root };
+
+  // Dokumente hinzufügen
+  documents.content!['resume.pdf'] = { 
+    type: 'file', 
+    name: 'resume.pdf',
+    parent: documents
+  };
+  
+  documents.content!['projects.md'] = { 
+    type: 'file', 
+    name: 'projects.md',
+    parent: documents
+  };
+  
+  // Spiele hinzufügen
+  games.content!['snake'] = { 
+    type: 'file', 
+    name: 'snake',
+    parent: games
+  };
+  
+  games.content!['tetris'] = { 
+    type: 'file', 
+    name: 'tetris',
+    parent: games
+  };
+  
+  games.content!['2048'] = { 
+    type: 'file', 
+    name: '2048',
+    parent: games
+  };
+
+  // Projekte hinzufügen
+  projects.content!['portfolio'] = { 
+    type: 'directory', 
+    name: 'portfolio',
+    content: {},
+    parent: projects
+  };
+  
+  projects.content!['web-apps'] = { 
+    type: 'directory', 
+    name: 'web-apps',
+    content: {},
+    parent: projects
+  };
+
+  return root;
 };
+
+// Dateisystem initialisieren
+export const fileSystem = initializeFileSystem();
 
 // Skills mit Prozenten
 const skillsData = {
   Frontend: [
-    { name: 'React', level: 100 },
-    { name: 'TypeScript', level: 80 },
-    { name: 'Next.js', level: 70 }
+    { name: 'React', level: 90 },
+    { name: 'TypeScript', level: 85 },
+    { name: 'Next.js', level: 80 }
   ],
   Backend: [
-    { name: 'Node.js', level: 80 },
-    { name: 'Express', level: 70 },
-    { name: 'PostgreSQL', level: 60 }
+    { name: 'Node.js', level: 88 },
+    { name: 'MongoDB', level: 82 }
   ],
-  'Tools & Others': [
-    { name: 'Git', level: 100 },
+  'Cloud & Tools': [
+    { name: 'AWS', level: 75 },
     { name: 'Docker', level: 80 },
-    { name: 'AWS', level: 70 }
+    { name: 'Netlify', level: 88 }
   ]
 };
 
@@ -76,14 +132,31 @@ const ls = (currentDir: Directory): CommandResponse => {
 };
 
 const cd = (path: string, currentDir: Directory): Directory | null => {
-  if (path === '..') return null;
+  // Bei .. zur übergeordneten Directory zurückkehren
+  if (path === '..') {
+    if (currentDir.parent) {
+      return currentDir.parent;
+    } else {
+      return currentDir; // Bleibe im Root-Verzeichnis
+    }
+  }
+  
+  // Absolute Pfade (beginnend mit /) navigieren vom Root
+  if (path.startsWith('/')) {
+    // Diese Implementierung ist vereinfacht - würde in einem echten Terminal erweitert werden
+    throw new Error('Absolute paths not supported in this demo');
+  }
+  
+  // Einfache Navigation in Unterverzeichnisse
   if (!currentDir.content || !currentDir.content[path]) {
     throw new Error(`Directory not found: ${path}`);
   }
+  
   const target = currentDir.content[path];
   if (target.type !== 'directory') {
     throw new Error(`Not a directory: ${path}`);
   }
+  
   return target;
 };
 
@@ -97,12 +170,12 @@ const about = (): CommandResponse => [
   'Full Stack Developer based in Germany',
   '',
   '🎯 Currently working on:',
-  '- Building awesome web applications',
-  '- Learning new technologies',
-  '- Creating innovative solutions',
+  '- Building modern web applications with React & TypeScript',
+  '- Exploring cloud infrastructure and deployment solutions',
+  '- Creating responsive and accessible user interfaces',
   '',
   { text: '→ View full profile', type: 'link', href: '#about' },
-  { text: '→ Download Resume', type: 'link', href: '#resume' }
+  { text: '→ Download Resume', type: 'link', href: '/resume.pdf' }
 ];
 
 const skills = (): CommandResponse => {
@@ -137,6 +210,8 @@ const help = (): CommandResponse => [
   '🛠️ Dev Tools:',
   '  clear     - Clear terminal',
   '  echo      - Print text',
+  '  time      - Show current time',
+  '  weather   - Show weather (demo)',
   '  matrix    - Toggle Matrix effect',
   '  neofetch  - System information',
   '',
@@ -159,7 +234,7 @@ const neofetch = (): CommandResponse => [
   '      █████████      OS: Portfolio OS',
   '      █████████      Shell: React Terminal',
   '      █████████      Theme: Cyberpunk',
-  '      █████████      Resolution: 1485x812',
+  '      █████████      Resolution: Dynamic',
   '      █████████      Browser: Mozilla/5.0',
   '      █████████      ',
   '                     ',
@@ -167,26 +242,41 @@ const neofetch = (): CommandResponse => [
 ];
 
 const matrix = (): CommandResponse => [{ 
-  text: 'Matrix mode toggled', 
+  text: 'Matrix mode activated 🕶️', 
   type: 'success' 
-}];
+}, 'Wake up, Neo...'];
 
 const clear = (): CommandResponse => [];
+
+const time = (): CommandResponse => {
+  const now = new Date();
+  return [`Current time: ${now.toLocaleTimeString()}`];
+};
+
+const weather = (): CommandResponse => [
+  'Weather for Cuxhaven, Germany:',
+  '🌤️  Currently: Partly Cloudy, 18°C',
+  '🌡️  Today: High 21°C, Low 14°C',
+  '💨  Wind: 15 km/h',
+  '💧  Humidity: 71%',
+  '',
+  'Note: This is demo weather data.'
+];
 
 const projects = (): CommandResponse => [
   '📂 My Projects:',
   '--------------',
-  '1. Portfolio Terminal',
-  '   - Interactive terminal-based portfolio',
-  '   - Tech: React, TypeScript, Tailwind',
+  '1. Portfolio Website',
+  '   - Interactive portfolio with terminal interface',
+  '   - Tech: React, TypeScript, Tailwind CSS',
   '',
-  '2. Snake Game',
-  '   - Classic snake game with modern features',
-  '   - Tech: React, Canvas API',
+  '2. E-Commerce Platform',
+  '   - Full-featured online shop with payment integration',
+  '   - Tech: Next.js, MongoDB, Stripe API',
   '',
-  '3. Tetris',
-  '   - Modern implementation of Tetris',
-  '   - Tech: React, TypeScript',
+  '3. Content Management System',
+  '   - Headless CMS for managing digital content',
+  '   - Tech: Node.js, React, GraphQL',
   '',
   { text: '→ View all projects', type: 'link', href: '#projects' }
 ];
@@ -205,19 +295,32 @@ const contact = (): CommandResponse => [
   { text: '→ Send email', type: 'link', href: 'mailto:diego@rodriguez-digital.de' },
   { text: '→ Call me', type: 'link', href: 'tel:+4915219377166' },
   { text: '→ WhatsApp', type: 'link', href: 'https://wa.me/4917641673111' },
-  { text: '→ View LinkedIn', type: 'link', href: 'https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile' },
+  { text: '→ View LinkedIn', type: 'link', href: 'https://www.linkedin.com/in/kadir-diego-padin-rodriguez-89a105362/' },
+  { text: '→ View GitHub', type: 'link', href: 'https://github.com/Rodriguez-Diego-web' },
 ];
 
 const social = (): CommandResponse => [
   '🔗 Social Links:',
   '--------------',
-  { text: '→ GitHub', type: 'link', href: 'https://github.com/Kadirdiegp' },
+  { text: '→ GitHub', type: 'link', href: 'https://github.com/Rodriguez-Diego-web' },
+  { text: '→ LinkedIn', type: 'link', href: 'https://www.linkedin.com/in/kadir-diego-padin-rodriguez-89a105362/' },
   { text: '→ Instagram', type: 'link', href: 'https://instagram.com/kadirdiego_' }
 ];
 
-const snake = (): CommandResponse => [];
-const tetris = (): CommandResponse => [];
-const _2048 = (): CommandResponse => [];
+const snake = (): CommandResponse => [{
+  text: 'Starting Snake game...', 
+  type: 'success'
+}];
+
+const tetris = (): CommandResponse => [{
+  text: 'Starting Tetris game...', 
+  type: 'success'
+}];
+
+const _2048 = (): CommandResponse => [{
+  text: 'Starting 2048 game...', 
+  type: 'success'
+}];
 
 export const commands = {
   ls,
@@ -233,6 +336,8 @@ export const commands = {
   matrix,
   help,
   clear,
+  time,
+  weather,
   snake,
   tetris,
   '2048': _2048

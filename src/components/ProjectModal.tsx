@@ -47,11 +47,6 @@ const ProjectModal = ({ isOpen, onClose, project }: ProjectModalProps) => {
     setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
-  const handleModalClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
-
   const handleCloseClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -135,6 +130,22 @@ const ProjectModal = ({ isOpen, onClose, project }: ProjectModalProps) => {
                 </span>
               ))}
             </div>
+
+            {/* Single YouTube Video */}
+            {project.videoUrl && (
+              <div className="space-y-4 mb-6">
+                <h4 className="text-xl font-bold mb-2">Video Demonstration</h4>
+                <div className="aspect-video">
+                  <iframe
+                    src={project.videoUrl}
+                    title={`${project.title} Demonstration`}
+                    className="w-full h-full rounded-lg"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+              </div>
+            )}
 
             {/* YouTube Videos */}
             {project.youtubeEmbeds && project.youtubeEmbeds.length > 0 && (

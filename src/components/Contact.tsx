@@ -105,15 +105,19 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-gray-50 dark:bg-dark-100">
+    <section id="contact" className="py-20 bg-black text-white">
       <div className="container mx-auto px-6">
         <ScrollReveal>
-          <h2 className="text-4xl font-bold text-center mb-16 gradient-text">Kontaktiere mich</h2>
+          <h2 className="text-5xl font-bold text-center mb-16 text-accent-400">
+            Kontaktiere mich
+          </h2>
         </ScrollReveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-          <div className="lg:col-span-2">
+        <div className="flex flex-col md:flex-row gap-12 overflow-hidden rounded-2xl">
+          {/* Kontaktformular Sektion - Linke Seite */}
+          <div className="md:w-2/3 bg-neutral-900 p-8 rounded-2xl">
             <ScrollReveal>
+              <h3 className="text-2xl font-semibold mb-6 text-accent-400">Schreib mir eine Nachricht</h3>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="relative">
@@ -125,10 +129,10 @@ const Contact = () => {
                       value={formData.name}
                       onChange={handleChange}
                       onFocus={handleFocus}
-                      placeholder="Your Name"
+                      placeholder="Dein Name"
                       required
                       autoComplete="name"
-                      className="w-full px-4 py-3 bg-white dark:bg-dark-200 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-accent-400 text-base"
+                      className="w-full px-4 py-3 bg-neutral-800 rounded-lg border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-accent-400 text-base placeholder-gray-400 text-white"
                     />
                   </div>
                   <div className="relative">
@@ -140,10 +144,10 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleChange}
                       onFocus={handleFocus}
-                      placeholder="Your Email"
+                      placeholder="Deine Email"
                       required
                       autoComplete="email"
-                      className="w-full px-4 py-3 bg-white dark:bg-dark-200 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-accent-400 text-base"
+                      className="w-full px-4 py-3 bg-neutral-800 rounded-lg border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-accent-400 text-base placeholder-gray-400 text-white"
                     />
                   </div>
                 </div>
@@ -155,52 +159,59 @@ const Contact = () => {
                     value={formData.message}
                     onChange={handleChange}
                     onFocus={handleFocus}
-                    placeholder="Your Message"
+                    placeholder="Deine Nachricht"
                     required
                     rows={6}
-                    autoComplete="off"
-                    className="w-full px-4 py-3 bg-white dark:bg-dark-200 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-accent-400 resize-none text-base"
+                    className="w-full px-4 py-3 bg-neutral-800 rounded-lg border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-accent-400 text-base placeholder-gray-400 text-white"
                   ></textarea>
                 </div>
+
                 <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full px-8 py-4 bg-gradient-to-r from-accent-400 to-accent-600 text-white rounded-lg flex items-center justify-center space-x-2 hover:from-accent-500 hover:to-accent-700 transition-colors disabled:opacity-50"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-full py-3 px-6 bg-accent-400 text-black font-semibold rounded-lg shadow-lg flex justify-center items-center space-x-2 transition-all disabled:opacity-70"
                 >
-                  <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
+                  <span>{isSubmitting ? 'Wird gesendet...' : 'Nachricht senden'}</span>
                   <Send className="w-5 h-5" />
                 </motion.button>
 
                 {formStatus.type === 'success' && (
-                  <p className="text-green-500 text-center mt-4">{formStatus.message}</p>
+                  <p className="text-green-400 text-center mt-4">{formStatus.message}</p>
                 )}
                 {formStatus.type === 'error' && (
-                  <p className="text-red-500 text-center mt-4">{formStatus.message}</p>
+                  <p className="text-red-400 text-center mt-4">{formStatus.message}</p>
                 )}
               </form>
             </ScrollReveal>
           </div>
 
-          <div className="space-y-8">
-            {contactInfo.map((info, index) => (
-              <ScrollReveal key={index} delay={index * 0.2}>
-                <motion.a
-                  href={info.link}
-                  whileHover={{ scale: 1.05 }}
-                  className="flex items-start p-6 bg-white dark:bg-dark-200 rounded-xl shadow-lg hover:shadow-xl border border-gray-200 dark:border-gray-700"
-                >
-                  <div className="p-3 bg-accent-400/10 rounded-lg">
-                    <info.Icon className="w-6 h-6 text-accent-400" />
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="text-lg font-semibold mb-1 text-gray-800 dark:text-gray-100">{info.title}</h3>
-                    <p className="text-gray-600 dark:text-gray-400">{info.content}</p>
-                  </div>
-                </motion.a>
-              </ScrollReveal>
-            ))}
+          {/* Kontaktinfo Sektion - Rechte Seite */}
+          <div className="md:w-1/3 bg-neutral-900 p-8 rounded-2xl">
+            <ScrollReveal>
+              <h3 className="text-2xl font-semibold mb-8 text-accent-400">Kontaktdaten</h3>
+              <div className="space-y-6">
+                {contactInfo.map((info, index) => (
+                  <motion.a
+                    key={index}
+                    href={info.link}
+                    target={info.title !== 'Location' ? '_blank' : undefined}
+                    rel="noreferrer"
+                    whileHover={{ scale: 1.03 }}
+                    className="flex items-center space-x-4 p-3 rounded-lg transition-colors hover:bg-neutral-800"
+                  >
+                    <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center bg-neutral-800 rounded-full text-accent-400">
+                      <info.Icon className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <h4 className="text-lg font-medium text-white">{info.title}</h4>
+                      <p className="text-gray-400">{info.content}</p>
+                    </div>
+                  </motion.a>
+                ))}
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </div>

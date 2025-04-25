@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Instagram, Mail, Globe2, Star } from 'lucide-react';
 import logo from '../assets/LOGO RODRIGUEZ_.png';
@@ -9,8 +8,8 @@ const Footer = () => {
   const socialLinks = [
     { Icon: Globe2, href: 'https://interaktivesysteme.fun', label: 'Website' },
     { Icon: Star, href: 'https://saskia-photographie.de', label: 'Website' },
-    { Icon: Github, href: 'https://github.com/Kadirdiegp', label: 'GitHub' },
-    { Icon: Linkedin, href: 'https://www.linkedin.com/in/kadir-diego-padin-rodriguez-b1b2b0201/', label: 'LinkedIn' },
+    { Icon: Github, href: 'https://github.com/Rodriguez-Diego-web', label: 'GitHub' },
+    { Icon: Linkedin, href: 'https://www.linkedin.com/in/kadir-diego-padin-rodriguez', label: 'LinkedIn' },
     { Icon: Instagram, href: 'https://www.instagram.com/kadirdiego_/', label: 'Instagram' },
     { Icon: Mail, href: 'mailto:diego@rodriguez-digital.de', label: 'Email' }
   ];
@@ -59,7 +58,7 @@ const Footer = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-gray-600 dark:text-gray-400 text-sm text-center"
           >
-            © {currentYear} Kadir Diego Padin Rodriguez
+            {currentYear} Kadir Diego Padin Rodriguez
             <br className="md:hidden" />
             <span className="hidden md:inline"> · </span>
             All rights reserved

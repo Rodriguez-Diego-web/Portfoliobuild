@@ -1,55 +1,74 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Briefcase, GraduationCap, Award, Users } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 
 const About = () => {
   const stats = [
-    { icon: Briefcase, value: '2+', label: 'Years Experience' },
-    { icon: Users, value: '30+', label: 'Happy Clients' },
-    { icon: Award, value: '20+', label: 'Projects Completed' },
-    { icon: GraduationCap, value: 'BSc', label: 'In Progress' }
+    { icon: Briefcase, value: '2+', label: 'Jahre Erfahrung' },
+    { icon: Users, value: '30+', label: 'Zufriedene Kunden' },
+    { icon: Award, value: '20+', label: 'Abgeschlossene Projekte' },
+    { icon: GraduationCap, value: 'BSc', label: 'In Bearbeitung' }
   ];
 
   return (
-    <section id="about" className="py-20 bg-gray-50 dark:bg-dark-100">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <ScrollReveal>
+    <section id="about" className="py-24 bg-black text-white overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:40px_40px] opacity-40"></div>
+      
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="flex flex-col lg:flex-row gap-16 items-center">
+          {/* Image Side - Left on desktop, top on mobile */}
+          <ScrollReveal className="w-full lg:w-1/2">
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-tr from-accent-400/20 to-accent-600/20 rounded-2xl transform rotate-6"></div>
-              <img
-                src="https://cdn.myportfolio.com/add13447-08e1-432a-b6ca-518d52c281da/ca829f95-6ddd-4463-97c8-350c99eddcf1_rw_1200.jpg?h=8d27d4b93e98c0198badded33d9bbf34"
-                alt="Creative workspace"
-                className="relative rounded-2xl shadow-2xl"
-              />
+              {/* Orange Highlight Element */}
+              <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-accent-400 rounded-full opacity-20 blur-xl"></div>
+              <div className="absolute -top-6 -left-6 w-32 h-32 bg-accent-400 rounded-full opacity-20 blur-xl"></div>
+              
+              {/* Main Image */}
+              <div className="relative overflow-hidden rounded-md border border-accent-400 shadow-xl">
+                <img
+                  src="https://cdn.myportfolio.com/add13447-08e1-432a-b6ca-518d52c281da/ca829f95-6ddd-4463-97c8-350c99eddcf1_rw_1200.jpg?h=8d27d4b93e98c0198badded33d9bbf34"
+                  alt="Creative workspace"
+                  className="w-full object-cover rounded-md"
+                />
+                {/* Overlay Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-black/60 to-transparent opacity-60"></div>
+              </div>
             </div>
           </ScrollReveal>
 
-          <div className="space-y-8">
+          {/* Content Side - Right on desktop, bottom on mobile */}
+          <div className="w-full lg:w-1/2 space-y-10">
             <ScrollReveal>
-              <h2 className="text-4xl font-bold gradient-text">About Me</h2>
-              <p className="text-gray-600 dark:text-gray-400 mt-4 text-lg leading-relaxed">
-                As a multidisciplinary designer and developer, I specialize in creating immersive digital experiences through a combination of 2D and 3D design, motion graphics, and development.
-              </p>
-              <p className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed">
-                My expertise spans across various creative tools including Blender for 3D modeling, After Effects for motion design, and modern development frameworks for web and mobile applications.
-              </p>
+              <div className="space-y-6">
+                <h2 className="text-4xl font-bold">
+                  <span className="text-accent-400">Über</span> Mich
+                </h2>
+                <div className="h-1 w-20 bg-accent-400 rounded-full"></div>
+                <p className="text-gray-400 text-lg leading-relaxed">
+                  Als multidisziplinärer Designer und Entwickler habe ich mich auf die Erstellung immersiver digitaler Erlebnisse spezialisiert, 
+                  die 2D- und 3D-Design, Motion Graphics und Entwicklung kombinieren.
+                </p>
+                <p className="text-gray-400 text-lg leading-relaxed">
+                  Meine Expertise umfasst verschiedene kreative Tools wie Blender für 3D-Modellierung, 
+                  After Effects für Motion Design und moderne Entwicklungs-Frameworks für Web- und Mobile-Anwendungen.
+                </p>
+              </div>
             </ScrollReveal>
 
             <ScrollReveal delay={0.2}>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-8">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
                 {stats.map((stat, index) => (
                   <motion.div
                     key={index}
-                    whileHover={{ y: -5 }}
-                    className="text-center p-4 bg-white dark:bg-dark-200 rounded-xl border border-accent-400/20 shadow-lg"
+                    whileHover={{ y: -5, borderColor: 'rgb(255, 144, 31)' }}
+                    className="text-center p-4 bg-dark-200 rounded-xl border border-accent-400 transition-colors shadow-lg hover:shadow-xl"
                   >
-                    <div className="inline-block p-3 bg-gradient-to-br from-accent-400/20 to-accent-600/20 rounded-lg mb-3">
-                      <stat.icon className="w-6 h-6 text-accent-400" />
+                    <div className="inline-block p-3 bg-accent-400/10 rounded-lg mb-3">
+                      <stat.icon className="w-5 h-5 text-accent-400" />
                     </div>
-                    <div className="text-2xl font-bold text-accent-400 mb-1">{stat.value}</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">{stat.label}</div>
+                    <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
+                    <div className="text-sm text-gray-400">{stat.label}</div>
                   </motion.div>
                 ))}
               </div>
@@ -61,22 +80,33 @@ const About = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   href="#contact"
-                  className="px-8 py-3 bg-gradient-to-r from-accent-400 to-accent-600 text-white rounded-full hover:from-accent-500 hover:to-accent-700 transition-all shadow-lg hover:shadow-accent-400/30"
+                  className="px-6 py-3 bg-accent-400 text-black font-medium rounded-lg hover:bg-accent-300 transition-colors shadow-lg hover:shadow-accent-400/30"
                 >
-                  Hire Me
+                  Kontakt
                 </motion.a>
                 <motion.a
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.05, borderColor: '#ff901f' }}
                   whileTap={{ scale: 0.95 }}
                   href="#projects"
-                  className="px-8 py-3 border-2 border-accent-400 text-accent-400 rounded-full hover:bg-accent-400/10 transition-colors"
+                  className="px-6 py-3 bg-dark-200 border border-accent-400 text-white font-medium rounded-lg hover:border-accent-400 transition-colors shadow-lg"
                 >
-                  View Portfolio
+                  Projekte
                 </motion.a>
               </div>
             </ScrollReveal>
           </div>
         </div>
+      </div>
+
+      {/* Orange Bottom Wave */}
+      <div className="absolute bottom-0 left-0 right-0 h-8 overflow-hidden">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-full">
+          <path 
+            d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" 
+            fill="#ff901f" 
+            opacity="0.15"
+          ></path>
+        </svg>
       </div>
     </section>
   );

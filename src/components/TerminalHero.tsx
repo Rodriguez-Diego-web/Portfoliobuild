@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { commands, fileSystem, isGameCommand } from '../utils/terminalCommands';
-import { TerminalResponse, Command } from '../types/terminal';
+import { TerminalResponse, Command, CommandResponse } from '../types/terminal';
 import MatrixRain from './MatrixRain';
 import SnakeGame from './TerminalGames/Snake';
 import TetrisGame from './TerminalGames/Tetris';
@@ -8,12 +8,8 @@ import Game2048 from './TerminalGames/Game2048';
 
 type GameType = 'snake' | 'tetris' | '2048' | null;
 
-const AVAILABLE_COMMANDS = [
-  'ls', 'cd', 'pwd', 'echo', 'time', 'weather',
-  'about', 'skills', 'projects', 'contact', 'social',
-  'neofetch', 'matrix', 'help', 'clear', 'snake',
-  'tetris', '2048'
-] as const;
+// Typdefinition für verfügbare Befehle
+type CommandKey = keyof typeof commands;
 
 const TerminalHero: React.FC = () => {
   const [input, setInput] = useState('');
@@ -50,55 +46,156 @@ const TerminalHero: React.FC = () => {
     const args = cmd.trim().split(' ');
     const command = args[0].toLowerCase();
     
-    let response: Array<string | TerminalResponse> = [];
+    let response: CommandResponse = [];
+
+    // Füge die Kommandozeile zum Verlauf hinzu
+    setCommandHistory(prev => [
+      ...prev,
+      { text: `${currentPath} $ ${cmd}`, type: 'command', response: [] }
+    ]);
 
     try {
-      const commandFn = commands[command as keyof typeof commands];
-      if (!commandFn) {
+      // Spezielle Befehle zuerst verarbeiten
+      if (command === 'time') {
+        const now = new Date();
+        response = [`Current time: ${now.toLocaleTimeString()}`];
+      } else if (command === 'weather') {
+        response = [
+          'Weather for Cuxhaven, Germany:',
+          '🌤️  Currently: Partly Cloudy, 18°C',
+          '🌡️  Today: High 21°C, Low 14°C',
+          '💨  Wind: 15 km/h',
+          '💧  Humidity: 71%',
+          '',
+          'Note: This is demo weather data.'
+        ];
+      }
+      // Andere Befehle prüfen
+      else if (!Object.prototype.hasOwnProperty.call(commands, command)) {
         response = [{ 
           text: `Command not found: ${command}. Type 'help' for available commands.`,
           type: 'error'
         }];
+        
+        // Füge die Antwort zum Verlauf hinzu und beende
+        setCommandHistory(prev => [
+          ...prev,
+          { text: '', type: 'response', response }
+        ]);
+        
+        setCommandHistoryBuffer(prev => [...prev, cmd]);
+        setCommandHistoryIndex(-1);
         return;
       }
 
-      // Handle special cases first
-      if (command === 'cd' && args[1]) {
-        const newDir = commandFn(args[1], currentDirectory);
-        if (newDir) {
-          setCurrentDirectory(newDir);
-          setCurrentPath(prev => `${prev}/${args[1]}`);
-        } else if (args[1] === '..') {
-          const pathParts = currentPath.split('/');
-          pathParts.pop();
-          setCurrentPath(pathParts.join('/'));
+      const commandKey = command as CommandKey;
+
+      // Handle special cases
+      if (commandKey === 'cd' && args[1]) {
+        try {
+          const newDir = commands.cd(args[1], currentDirectory);
+          if (newDir) {
+            setCurrentDirectory(newDir);
+            setCurrentPath(prev => 
+              args[1] === '..' 
+                ? prev.split('/').slice(0, -1).join('/') || '~'
+                : `${prev}/${args[1]}`
+            );
+          }
+        } catch (error) {
+          response = [{ 
+            text: error instanceof Error ? error.message : 'Navigation error',
+            type: 'error'
+          }];
+          
+          setCommandHistory(prev => [
+            ...prev,
+            { text: '', type: 'response', response }
+          ]);
         }
+        
+        setCommandHistoryBuffer(prev => [...prev, cmd]);
+        setCommandHistoryIndex(-1);
         return;
       }
 
-      if (command === 'matrix') {
-        setShowMatrix(prev => !prev);
-      } else if (command === 'clear') {
+      // Clear - leert den Verlauf
+      if (commandKey === 'clear') {
         setCommandHistory([]);
+        
+        setCommandHistoryBuffer(prev => [...prev, cmd]);
+        setCommandHistoryIndex(-1);
         return;
-      } else if (isGameCommand(command)) {
+      }
+      
+      // Spiele starten
+      if (isGameCommand(command)) {
         setCurrentGame(command as GameType);
+        
+        // Spielstart-Nachricht anzeigen
+        let gameResponse: CommandResponse = [];
+        if (commandKey === 'snake') {
+          gameResponse = commands.snake();
+        } else if (commandKey === 'tetris') {
+          gameResponse = commands.tetris();
+        } else if (commandKey === '2048') {
+          gameResponse = commands['2048']();
+        }
+        
+        setCommandHistory(prev => [
+          ...prev,
+          { text: '', type: 'response', response: gameResponse }
+        ]);
+        
+        setCommandHistoryBuffer(prev => [...prev, cmd]);
+        setCommandHistoryIndex(-1);
+        return;
+      }
+      
+      // Matrix - zeigt Matrix-Animation und gibt Text aus
+      if (commandKey === 'matrix') {
+        const matrixResponse = commands.matrix();
+        setShowMatrix(prev => !prev);
+        
+        setCommandHistory(prev => [
+          ...prev,
+          { text: '', type: 'response', response: matrixResponse }
+        ]);
+        
+        setCommandHistoryBuffer(prev => [...prev, cmd]);
+        setCommandHistoryIndex(-1);
         return;
       }
 
-      // Execute the command and get response
-      let result;
-      if (command === 'ls') {
-        result = commandFn(currentDirectory);
-      } else if (command === 'pwd') {
-        result = commandFn(currentPath);
-      } else if (command === 'echo') {
-        result = commandFn(args.slice(1));
-      } else {
-        result = commandFn();
+      // Execute the command and get response, only if we haven't handled it yet
+      if (command !== 'time' && command !== 'weather') {
+        let result: CommandResponse;
+        if (commandKey === 'ls') {
+          result = commands.ls(currentDirectory);
+        } else if (commandKey === 'pwd') {
+          result = commands.pwd(currentPath);
+        } else if (commandKey === 'echo') {
+          result = commands.echo(args.slice(1));
+        } else if (commandKey === 'about') {
+          result = commands.about();
+        } else if (commandKey === 'skills') {
+          result = commands.skills();
+        } else if (commandKey === 'projects') {
+          result = commands.projects();
+        } else if (commandKey === 'contact') {
+          result = commands.contact();
+        } else if (commandKey === 'social') {
+          result = commands.social();
+        } else if (commandKey === 'neofetch') {
+          result = commands.neofetch();
+        } else if (commandKey === 'help') {
+          result = commands.help();
+        } else {
+          result = [];
+        }
+        
+        response = Array.isArray(result) ? result : [];
       }
-
-      response = Array.isArray(result) ? result : [];
     } catch (error) {
       if (error instanceof Error) {
         response = [{ 
@@ -108,13 +205,12 @@ const TerminalHero: React.FC = () => {
       }
     }
 
-    console.log('Command:', command, 'Response:', response);
-
+    // Füge die Antwort zum Verlauf hinzu
     setCommandHistory(prev => [
       ...prev,
-      { text: `${currentPath} $ ${cmd}`, type: 'command', response: [] },
       { text: '', type: 'response', response }
     ]);
+    
     setCommandHistoryBuffer(prev => [...prev, cmd]);
     setCommandHistoryIndex(-1);
   };
@@ -149,6 +245,10 @@ const TerminalHero: React.FC = () => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
+  };
+
+  const exitGame = () => {
+    setCurrentGame(null);
   };
 
   const renderResponse = (response: Array<string | TerminalResponse>) => {
@@ -208,24 +308,26 @@ const TerminalHero: React.FC = () => {
             className="flex-1 bg-transparent outline-none border-none ml-2"
             autoFocus
           />
-          <span className={`${cursorVisible ? 'opacity-100' : 'opacity-0'}`}>
-            ▋
+          <span className={`cursor ${cursorVisible ? 'visible' : 'invisible'}`}>
+            |
           </span>
         </div>
       </div>
-      {currentGame && (
-        <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center">
-          <div className="relative">
-            <button
-              onClick={() => setCurrentGame(null)}
-              className="absolute top-4 right-4 text-white hover:text-gray-300"
-            >
-              Close [X]
-            </button>
-            {currentGame === 'snake' && <SnakeGame />}
-            {currentGame === 'tetris' && <TetrisGame />}
-            {currentGame === '2048' && <Game2048 />}
-          </div>
+
+      {/* Game container */}
+      {currentGame === 'snake' && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-90">
+          <SnakeGame onExit={exitGame} />
+        </div>
+      )}
+      {currentGame === 'tetris' && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-90">
+          <TetrisGame onExit={exitGame} />
+        </div>
+      )}
+      {currentGame === '2048' && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-90">
+          <Game2048 onExit={exitGame} />
         </div>
       )}
     </div>

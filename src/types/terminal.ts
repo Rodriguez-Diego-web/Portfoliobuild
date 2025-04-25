@@ -7,7 +7,7 @@ export interface TerminalResponse {
 export interface Command {
   text: string;
   response?: Array<string | TerminalResponse>;
-  type: 'command' | 'response';
+  type: 'command' | 'response' | 'text';
 }
 
 export type CommandResponse = Array<string | TerminalResponse>;

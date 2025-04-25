@@ -49,8 +49,8 @@ const Blog: React.FC = () => {
           viewport={{ once: true }}
           className="mb-12 text-center"
         >
-          <h2 className="text-4xl font-bold mb-4 text-white">Blog & Insights</h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          <h2 className="text-5xl font-bold mb-4 text-accent-400">Blog & Insights</h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Gedanken, Tutorials und Einblicke in die Welt der Webentwicklung. Hier teile ich mein Wissen und meine Erfahrungen.
           </p>
         </motion.div>
@@ -63,25 +63,25 @@ const Blog: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: post.id * 0.1 }}
               viewport={{ once: true }}
-              className="bg-gray-900 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+              className="bg-neutral-900 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-neutral-800"
             >
               <div className="p-6">
                 <div className="flex flex-wrap gap-2 mb-4">
                   {post.tags.map((tag, index) => (
-                    <span key={index} className="px-2 py-1 bg-blue-600 text-xs font-semibold rounded-full text-white">
+                    <span key={index} className="px-2 py-1 bg-accent-400 text-xs font-semibold rounded-full text-black">
                       {tag}
                     </span>
                   ))}
                 </div>
-                <h3 className="text-xl font-bold mb-2 text-white hover:text-blue-400 transition-colors">
+                <h3 className="text-xl font-bold mb-2 text-white hover:text-accent-400 transition-colors">
                   <a href={`/blog/${post.slug}`}>{post.title}</a>
                 </h3>
-                <p className="text-gray-400 mb-4">{post.excerpt}</p>
+                <p className="text-gray-300 mb-4">{post.excerpt}</p>
                 <div className="flex justify-between items-center mt-4">
-                  <span className="text-sm text-gray-500">{post.date}</span>
+                  <span className="text-sm text-gray-400">{post.date}</span>
                   <a
                     href={`/blog/${post.slug}`}
-                    className="text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors"
+                    className="text-accent-400 hover:text-accent-300 text-sm font-medium transition-colors"
                   >
                     Weiterlesen →
                   </a>
@@ -94,7 +94,7 @@ const Blog: React.FC = () => {
         <div className="text-center mt-12">
           <a
             href="/blog"
-            className="inline-block px-6 py-3 border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white rounded-full transition-colors duration-300"
+            className="inline-block px-6 py-3 border border-accent-400 text-accent-400 hover:bg-accent-400 hover:text-black rounded-full transition-colors duration-300"
           >
             Alle Blogbeiträge anzeigen
           </a>

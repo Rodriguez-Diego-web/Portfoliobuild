@@ -169,7 +169,7 @@ const Projects = () => {
         cloudinaryUrls.käfig,
         cloudinaryUrls.taube
       ],
-      tech: ['Photography', 'Video Production', 'Visual Storytelling']
+      tech: ['Photoshop', 'Comfyui', 'Visual Storytelling']
     },
     {
       title: 'AVM - Audiovisual Media',
