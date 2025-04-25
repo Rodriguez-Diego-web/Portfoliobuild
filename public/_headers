@@ -1,7 +1,7 @@
 /*
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
-  # Content-Security-Policy wurde temporär entfernt, um Fehler zu beheben
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://region1.google-analytics.com https://*.analytics.google.com https://analytics.google.com; img-src 'self' data: https://*.google-analytics.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline';
 
 /*.js
   Content-Type: application/javascript; charset=utf-8
