@@ -205,12 +205,12 @@ const projectsData: Project[] = [
     description: "Eine Sammlung von KI-generierten Tierbildern, die die Kreativität und Technologie in der digitalen Kunst demonstrieren. Dieses persönliche Projekt zeigt meinen experimentellen Umgang mit KI-Bildgenerierung und digitaler Kunstschaffung.",
     category: "other",
     images: [
-      { path: "/hero.jpg", alt: "KI-generierter Engel" },
-      { path: "/hero.jpg", alt: "KI-generiertes Goldfischglas" },
-      { path: "/hero.jpg", alt: "KI-generierter Hamster" },
-      { path: "/hero.jpg", alt: "KI-generiertes Schwein" },
-      { path: "/hero.jpg", alt: "KI-generierter Käfig" },
-      { path: "/hero.jpg", alt: "KI-generierte Taube" }
+      { path: "/kibilder/Mittel (Angel Kopie).jpeg", alt: "KI-generierter Engel" },
+      { path: "/kibilder/Mittel (Goldfischglas Kopie).jpeg", alt: "KI-generiertes Goldfischglas" },
+      { path: "/kibilder/Mittel (Hamster Kopie).jpeg", alt: "KI-generierter Hamster" },
+      { path: "/kibilder/Mittel (Schwein Kopie).jpeg", alt: "KI-generiertes Schwein" },
+      { path: "/kibilder/Mittel (käfig Kopie).jpeg", alt: "KI-generierter Käfig" },
+      { path: "/kibilder/Mittel (taube Kopie).jpeg", alt: "KI-generierte Taube" }
     ],
     technologies: ["AI Image Generation", "Prompt Engineering", "Digital Art", "Midjourney"],
     featured: false,
