@@ -11,9 +11,14 @@ export default defineConfig({
       ext: '.gz'
     })
   ],
-  assetsInclude: ['**/*.MP4', '**/*.avi'],
+  base: '/', // Setzt die Base-URL für alle Assets
+  assetsInclude: ['**/*.MP4', '**/*.avi', '**/*.jpg', '**/*.png', '**/*.svg'],
   build: {
     minify: 'terser',
+    sourcemap: false, // Keine Sourcemaps in der Production
+    outDir: 'dist',
+    assetsDir: 'assets',
+    emptyOutDir: true,
     terserOptions: {
       compress: {
         drop_console: false, // Aktiviere Konsolenausgaben für Debugging
@@ -23,7 +28,8 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['react', 'react-dom'],
+          vendor: ['react', 'react-dom', 'framer-motion'],
+          ui: ['lucide-react', '@headlessui/react'],
         },
         entryFileNames: 'assets/[name].[hash].js', // Eindeutige Namen für JS-Dateien
         chunkFileNames: 'assets/[name].[hash].js',
