@@ -1,4 +1,4 @@
-import { TerminalResponse, CommandResponse } from '../types/terminal';
+import { CommandResponse } from '../types/terminal';
 
 interface Directory {
   name: string;
@@ -6,42 +6,44 @@ interface Directory {
   content?: { [key: string]: Directory };
 }
 
-// Alle verfügbaren Befehle
-const AVAILABLE_COMMANDS = [
+// Alle verfügbaren Befehle als Konstante für den Export
+export const AVAILABLE_COMMANDS = [
   'ls', 'cd', 'pwd', 'echo',
   'about', 'skills', 'projects', 'contact', 'social',
   'neofetch', 'matrix', 'help', 'clear', 'snake',
   'tetris', '2048'
 ] as const;
 
-type CommandType = typeof AVAILABLE_COMMANDS[number];
-
 // Dateisystem
 export const fileSystem: Directory = {
-  'Documents': {
-    type: 'directory',
-    name: 'Documents',
-    content: {
-      'resume.pdf': { type: 'file', name: 'resume.pdf' },
-      'projects.md': { type: 'file', name: 'projects.md' }
-    }
-  },
-  'Games': {
-    type: 'directory',
-    name: 'Games',
-    content: {
-      'snake': { type: 'file', name: 'snake' },
-      'tetris': { type: 'file', name: 'tetris' },
-      '2048': { type: 'file', name: '2048' }
-    }
-  },
-  'Projects': {
-    type: 'directory',
-    name: 'Projects',
-    content: {
-      'portfolio': { type: 'directory', name: 'portfolio' },
-      'snake-game': { type: 'directory', name: 'snake-game' },
-      'tetris-game': { type: 'directory', name: 'tetris-game' }
+  name: 'root',
+  type: 'directory',
+  content: {
+    'Documents': {
+      type: 'directory',
+      name: 'Documents',
+      content: {
+        'resume.pdf': { type: 'file', name: 'resume.pdf' },
+        'projects.md': { type: 'file', name: 'projects.md' }
+      }
+    },
+    'Games': {
+      type: 'directory',
+      name: 'Games',
+      content: {
+        'snake': { type: 'file', name: 'snake' },
+        'tetris': { type: 'file', name: 'tetris' },
+        '2048': { type: 'file', name: '2048' }
+      }
+    },
+    'Projects': {
+      type: 'directory',
+      name: 'Projects',
+      content: {
+        'portfolio': { type: 'directory', name: 'portfolio' },
+        'snake-game': { type: 'directory', name: 'snake-game' },
+        'tetris-game': { type: 'directory', name: 'tetris-game' }
+      }
     }
   }
 };
@@ -73,7 +75,7 @@ const ls = (currentDir: Directory): CommandResponse => {
   });
 };
 
-const cd = (path: string, currentDir: Directory) => {
+const cd = (path: string, currentDir: Directory): Directory | null => {
   if (path === '..') return null;
   if (!currentDir.content || !currentDir.content[path]) {
     throw new Error(`Directory not found: ${path}`);
@@ -192,15 +194,18 @@ const projects = (): CommandResponse => [
 const contact = (): CommandResponse => [
   '📫 Contact Information:',
   '---------------------',
-  'Email: kadirdiegopadin@gmail.com',
-  'GitHub: github.com/Kadirdiegp',
-  'Instagram: @kadirdiego_',
-  'Location: Germany',
+  'Email: diego@rodriguez-digital.de',
+  'Phone (Call): +49 152 193 77166',
+  'WhatsApp: +49 176 41673111',
+  'LinkedIn: Diego Rodriguez',
+  'GitHub: github.com/Rodriguez-Diego-web',
+  'Location: Cuxhaven, Germany',
   'Feel free to reach out for collaborations!',
   '',
-  { text: '→ Send email', type: 'link', href: 'mailto:kadirdiegopadin@gmail.com' },
-  { text: '→ GitHub', type: 'link', href: 'https://github.com/Kadirdiegp' },
-  { text: '→ Instagram', type: 'link', href: 'https://instagram.com/kadirdiego_' }
+  { text: '→ Send email', type: 'link', href: 'mailto:diego@rodriguez-digital.de' },
+  { text: '→ Call me', type: 'link', href: 'tel:+4915219377166' },
+  { text: '→ WhatsApp', type: 'link', href: 'https://wa.me/4917641673111' },
+  { text: '→ View LinkedIn', type: 'link', href: 'https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile' },
 ];
 
 const social = (): CommandResponse => [

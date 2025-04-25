@@ -1,64 +1,68 @@
 import React, { useState, FormEvent, FocusEvent } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, MessageSquare, Linkedin, Github } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    subject: '',
-    message: ''
+    message: '',
   });
   
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [formStatus, setFormStatus] = useState<{
+    message: string;
+    type: 'success' | 'error' | '';
+  }>({
+    message: '',
+    type: '',
+  });
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if ('activeElement' in document) {
-      (document.activeElement as HTMLElement)?.blur();
-    }
     setIsSubmitting(true);
-    
+
     try {
-      const response = await fetch('https://formspree.io/f/xjkvrokg', {
+      const response = await fetch('https://formspree.io/f/xnqewlrn', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
       });
 
       if (response.ok) {
-        setSubmitStatus('success');
-        setFormData({ name: '', email: '', subject: '', message: '' });
+        setFormStatus({ message: 'Message sent successfully!', type: 'success' });
+        setFormData({ name: '', email: '', message: '' });
       } else {
-        setSubmitStatus('error');
+        setFormStatus({ message: 'Failed to send message. Please try again.', type: 'error' });
       }
-    } catch (error) {
-      setSubmitStatus('error');
+    } catch (errorObj) {
+      console.error('Form submission error:', errorObj);
+      setFormStatus({ message: 'Failed to send message. Please try again.', type: 'error' });
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleFocus = (e: FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    // Prevent scroll on iOS Safari
-    setTimeout(() => {
-      const viewHeight = window.innerHeight;
-      const elementTop = e.target.getBoundingClientRect().top;
-      if (elementTop > viewHeight * 0.5) {
-        e.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    }, 0);
+    // Smooth scroll to focused input on mobile
+    const viewportHeight = window.innerHeight;
+    const elementPosition = e.target.getBoundingClientRect().top;
+    const offset = 150; // Adjust offset based on your layout
+
+    if (elementPosition > viewportHeight / 2) {
+      window.scrollBy({
+        top: elementPosition - viewportHeight / 2 + offset,
+        behavior: 'smooth'
+      });
+    }
   };
 
   const contactInfo = [
@@ -70,15 +74,33 @@ const Contact = () => {
     },
     {
       Icon: Phone,
-      title: 'Phone',
-      content: '0176 55429381',
-      link: 'tel:017655429381'
+      title: 'Anrufen',
+      content: '0152 193 77166',
+      link: 'tel:+4915219377166'
+    },
+    {
+      Icon: MessageSquare,
+      title: 'WhatsApp',
+      content: '0176 41673111',
+      link: 'https://wa.me/4917641673111'
     },
     {
       Icon: MapPin,
       title: 'Location',
       content: 'Cuxhaven, Germany',
       link: '#'
+    },
+    {
+      Icon: Linkedin,
+      title: 'LinkedIn',
+      content: 'Diego Rodriguez',
+      link: 'https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile'
+    },
+    {
+      Icon: Github,
+      title: 'GitHub',
+      content: 'Rodriguez-Diego-web',
+      link: 'https://github.com/Rodriguez-Diego-web'
     }
   ];
 
@@ -86,7 +108,7 @@ const Contact = () => {
     <section id="contact" className="py-20 bg-gray-50 dark:bg-dark-100">
       <div className="container mx-auto px-6">
         <ScrollReveal>
-          <h2 className="text-4xl font-bold text-center mb-16 gradient-text">Get in Touch</h2>
+          <h2 className="text-4xl font-bold text-center mb-16 gradient-text">Kontaktiere mich</h2>
         </ScrollReveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -126,21 +148,6 @@ const Contact = () => {
                   </div>
                 </div>
                 <div className="relative">
-                  <label htmlFor="subject" className="sr-only">Subject</label>
-                  <input
-                    type="text"
-                    name="subject"
-                    id="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    onFocus={handleFocus}
-                    placeholder="Subject"
-                    required
-                    autoComplete="off"
-                    className="w-full px-4 py-3 bg-white dark:bg-dark-200 rounded-lg border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-accent-400 text-base"
-                  />
-                </div>
-                <div className="relative">
                   <label htmlFor="message" className="sr-only">Message</label>
                   <textarea
                     name="message"
@@ -166,11 +173,11 @@ const Contact = () => {
                   <Send className="w-5 h-5" />
                 </motion.button>
 
-                {submitStatus === 'success' && (
-                  <p className="text-green-500 text-center mt-4">Message sent successfully!</p>
+                {formStatus.type === 'success' && (
+                  <p className="text-green-500 text-center mt-4">{formStatus.message}</p>
                 )}
-                {submitStatus === 'error' && (
-                  <p className="text-red-500 text-center mt-4">Failed to send message. Please try again.</p>
+                {formStatus.type === 'error' && (
+                  <p className="text-red-500 text-center mt-4">{formStatus.message}</p>
                 )}
               </form>
             </ScrollReveal>
