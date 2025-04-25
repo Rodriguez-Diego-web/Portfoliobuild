@@ -11,6 +11,8 @@ interface ProjectModalProps {
     image: string;
     images?: string[];
     videoUrl?: string;
+    videoPath?: string;
+    localVideos?: string[];
     videoEmbeds?: string[];
     youtubeEmbeds?: string[];
     tech: string[];
@@ -119,6 +121,21 @@ const ProjectModal = ({ isOpen, onClose, project }: ProjectModalProps) => {
               {project.description}
             </p>
 
+            {/* Visit Website Button */}
+            {project.liveUrl && (
+              <div className="mb-4">
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-4 py-2 bg-accent-400 text-black font-medium rounded-md hover:bg-accent-500 transition-colors"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  Website besuchen
+                </a>
+              </div>
+            )}
+
             {/* Technologies */}
             <div className="flex flex-wrap gap-2 mb-4">
               {project.tech.map((tech, index) => (
@@ -143,6 +160,40 @@ const ProjectModal = ({ isOpen, onClose, project }: ProjectModalProps) => {
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                   />
+                </div>
+              </div>
+            )}
+
+            {/* Local Video */}
+            {project.videoPath && (
+              <div className="space-y-4 mb-6">
+                <h4 className="text-xl font-bold mb-2">Video Demonstration</h4>
+                <div className="aspect-video bg-black">
+                  <video 
+                    src={project.videoPath} 
+                    className="w-full h-full" 
+                    controls
+                    autoPlay={false}
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* Local Videos List */}
+            {project.localVideos && project.localVideos.length > 0 && (
+              <div className="space-y-4">
+                <h4 className="text-xl font-bold mb-2">Videos</h4>
+                <div className="grid gap-4">
+                  {project.localVideos.map((videoPath, index) => (
+                    <div key={index} className="aspect-video bg-black">
+                      <video 
+                        src={videoPath} 
+                        className="w-full h-full" 
+                        controls
+                        autoPlay={false}
+                      />
+                    </div>
+                  ))}
                 </div>
               </div>
             )}
