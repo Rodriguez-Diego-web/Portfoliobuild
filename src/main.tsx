@@ -12,7 +12,7 @@ import emailjs from '@emailjs/browser';
 initGA();
 
 // EmailJS initialisieren
-emailjs.init('2FiVwKz2ZCrHs-_gh');
+emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '2FiVwKz2ZCrHs-_gh');
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

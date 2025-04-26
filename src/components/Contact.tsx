@@ -5,9 +5,9 @@ import ScrollReveal from './ScrollReveal';
 import emailjs from '@emailjs/browser';
 
 // EmailJS-Konfiguration
-const EMAILJS_SERVICE_ID = 'service_yo3ovyt';
-const EMAILJS_TEMPLATE_ID = 'template_84x1pto';
-const EMAILJS_PUBLIC_KEY = '2FiVwKz2ZCrHs-_gh'; // Exakt wie im Dashboard angezeigt
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_yo3ovyt';
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_84x1pto';
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '2FiVwKz2ZCrHs-_gh'; // Exakt wie im Dashboard angezeigt
 
 const Contact = () => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -105,12 +105,12 @@ const Contact = () => {
       } else {
         setFormStatus({ message: 'Fehler beim Senden der Nachricht. Bitte versuche es erneut.', type: 'error' });
       }
-    } catch (errorObj: any) {
+    } catch (errorObj: Error | unknown) {
       console.error('Formular-Übermittlungsfehler:', errorObj);
       let errorMessage = 'Fehler beim Senden der Nachricht. Bitte versuche es erneut.';
       
-      if (errorObj && errorObj.text) {
-        errorMessage += ` (${errorObj.text})`;
+      if (errorObj && typeof errorObj === 'object' && 'text' in errorObj) {
+        errorMessage += ` (${(errorObj as { text: string }).text})`;
       }
       
       setFormStatus({ message: errorMessage, type: 'error' });
