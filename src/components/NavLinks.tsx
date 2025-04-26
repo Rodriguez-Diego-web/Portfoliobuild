@@ -1,24 +1,22 @@
 import React from 'react';
 import { Link } from 'react-scroll';
+import { SectionId } from '../types';
 
 interface NavLinksProps {
-  mobile?: boolean;
-  setIsOpen?: (isOpen: boolean) => void;
+  currentSection: SectionId;
+  onClick: (sectionId: SectionId) => void;
+  isMobile?: boolean;
 }
 
-const NavLinks: React.FC<NavLinksProps> = ({ mobile, setIsOpen }) => {
+const NavLinks: React.FC<NavLinksProps> = ({ currentSection, onClick, isMobile }) => {
   const links = [
-    { to: 'about', label: 'About' },
-    { to: 'services', label: 'Services' },
-    { to: 'projects', label: 'Projects' },
-    { to: 'contact', label: 'Contact' }
+    { to: 'about' as SectionId, label: 'About' },
+    { to: 'services' as SectionId, label: 'Services' },
+    { to: 'pricing' as SectionId, label: 'Preise' },
+    { to: 'testimonials' as SectionId, label: 'Referenzen' },
+    { to: 'portfolio' as SectionId, label: 'Projects' },
+    { to: 'contact' as SectionId, label: 'Contact' }
   ];
-
-  const handleClick = () => {
-    if (mobile && setIsOpen) {
-      setIsOpen(false);
-    }
-  };
 
   return (
     <>
@@ -30,10 +28,12 @@ const NavLinks: React.FC<NavLinksProps> = ({ mobile, setIsOpen }) => {
           smooth={true}
           offset={-100}
           duration={500}
-          onClick={handleClick}
-          className={`cursor-pointer text-light-900 hover:text-accent-400 transition-colors ${
-            mobile ? 'block py-2 px-4' : ''
-          }`}
+          onClick={() => onClick(to)}
+          className={`cursor-pointer transition-colors 
+            ${currentSection === to 
+              ? 'text-accent-400 font-medium' 
+              : 'text-light-900 hover:text-accent-400'} 
+            ${isMobile ? 'block py-2 px-4' : 'inline-block mx-3'}`}
         >
           {label}
         </Link>
