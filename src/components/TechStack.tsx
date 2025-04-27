@@ -184,21 +184,21 @@ const TechStack = () => {
     : technologies.filter(tech => tech.category === selectedCategory);
 
   return (
-    <section id="skills" className="py-20 bg-black text-white">
-      <div className="container mx-auto px-6">
-        <div className="mb-12 text-center">
-          <h2 className="text-5xl font-bold mb-6 text-accent-400">Tech Stack</h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-10">
+    <section id="skills" className="py-24 md:py-32 bg-black text-white">
+      <div className="container mx-auto px-6 md:px-8 lg:px-10">
+        <div className="mb-16 text-center max-w-4xl mx-auto">
+          <h2 className="text-5xl font-bold mb-8 text-accent-400">Tech Stack</h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12">
             Die Technologien, mit denen ich arbeite und entwickle. Von Frontend über Backend bis hin zu Design-Tools.
           </p>
 
           {/* Filter-Navigation */}
-          <div className="flex flex-wrap justify-center gap-3 mb-10">
+          <div className="flex flex-wrap justify-center gap-4 mb-16">
             {categories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
-                className={`px-4 py-2 rounded-full transition-all ${
+                className={`px-5 py-3 rounded-full transition-all ${
                   selectedCategory === category.id
                     ? 'bg-accent-400 text-white'
                     : 'bg-neutral-800 text-gray-300 hover:bg-neutral-700'
@@ -211,7 +211,7 @@ const TechStack = () => {
         </div>
 
         {/* Technologie-Karten */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-6 lg:gap-8 max-w-[1600px] mx-auto px-2 md:px-4">
           {filteredTechnologies.map((tech) => (
             <div
               key={tech.name}
@@ -219,14 +219,14 @@ const TechStack = () => {
               onMouseEnter={() => setHoveredTech(tech.name)}
               onMouseLeave={() => setHoveredTech(null)}
             >
-              <div className="p-6 flex flex-col items-center">
-                <img src={tech.icon} alt={tech.name} className="w-16 h-16 mb-4" />
-                <h3 className="text-lg font-bold text-white mb-1">{tech.name}</h3>
-                <p className="text-sm text-gray-400">{tech.experience}</p>
+              <div className="p-6 md:p-8 flex flex-col items-center">
+                <img src={tech.icon} alt={tech.name} className="w-20 h-20 mb-6" />
+                <h3 className="text-xl font-bold text-white mb-2">{tech.name}</h3>
+                <p className="text-md text-gray-400">{tech.experience}</p>
                 {hoveredTech === tech.name && (
-                  <div className="absolute inset-0 bg-neutral-900 bg-opacity-95 p-6 flex flex-col justify-center">
-                    <h3 className="text-lg font-bold text-accent-400 mb-2">{tech.name}</h3>
-                    <p className="text-sm text-gray-300 mb-4">{tech.description}</p>
+                  <div className="absolute inset-0 bg-neutral-900 bg-opacity-95 p-6 md:p-8 flex flex-col justify-center">
+                    <h3 className="text-xl font-bold text-accent-400 mb-3">{tech.name}</h3>
+                    <p className="text-md text-gray-300 mb-6">{tech.description}</p>
                     <div className="w-full bg-neutral-800 h-2 rounded-full overflow-hidden">
                       <div 
                         className="bg-accent-400 h-full rounded-full" 

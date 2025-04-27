@@ -195,8 +195,15 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-white dark:bg-dark-200">
-      <div className="container mx-auto px-4">
+    <div id="contact" className="relative py-20" style={{ 
+      width: '100vw',
+      marginLeft: 'calc(50% - 50vw)',
+      marginRight: 'calc(50% - 50vw)',
+      backgroundColor: 'white',
+    }}>
+      <div className="dark:bg-dark-200 absolute inset-0 w-full h-full"></div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <ScrollReveal>
           <h2 className="text-4xl font-bold mb-4 text-center gradient-text">Kontakt</h2>
           <p className="text-gray-600 dark:text-gray-400 text-center mb-12 max-w-2xl mx-auto">
@@ -394,7 +401,7 @@ const Contact = () => {
           </ScrollReveal>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

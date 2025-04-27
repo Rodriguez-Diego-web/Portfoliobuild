@@ -55,8 +55,11 @@ const Services = () => {
   ];
 
   return (
-    <section id="services" className="py-20 bg-gray-50 dark:bg-dark-100">
-      <div className="container mx-auto px-4">
+    <section id="services" className="py-20 relative">
+      {/* Hintergrund, der über die volle Bildschirmbreite geht */}
+      <div className="absolute inset-0 bg-gray-50 dark:bg-dark-100 w-screen left-[calc(50%-50vw)]"></div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <ScrollReveal>
           <h2 className="text-4xl font-bold mb-4 text-center gradient-text">
             Services

@@ -41,8 +41,15 @@ const CtaSection = ({
   };
 
   return (
-    <section className={`${bgColor} py-16 overflow-hidden`}>
-      <div className="container mx-auto px-4">
+    <section id="cta" className="relative py-16 overflow-hidden">
+      {/* Hintergrund, der über die volle Bildschirmbreite geht */}
+      <div className={`absolute inset-0 ${bgColor} w-screen left-[calc(50%-50vw)]`}></div>
+      
+      {/* Decorative elements */}
+      <div className="absolute -left-16 -bottom-16 w-64 h-64 rounded-full bg-white/10 blur-3xl"></div>
+      <div className="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-white/10 blur-3xl"></div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <ScrollReveal>
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
@@ -76,10 +83,6 @@ const CtaSection = ({
           </div>
         </ScrollReveal>
       </div>
-      
-      {/* Decorative elements */}
-      <div className="absolute -left-16 -bottom-16 w-64 h-64 rounded-full bg-white/10 blur-3xl"></div>
-      <div className="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-white/10 blur-3xl"></div>
     </section>
   );
 };

@@ -41,7 +41,6 @@ const Header: React.FC<HeaderProps> = ({
     { id: 'about', label: 'ÜBER MICH' },
     { id: 'services', label: 'SERVICES' },
     { id: 'pricing', label: 'PRICING' },
-    { id: 'testimonials', label: 'TESTIMONIALS' },
     { id: 'blog', label: 'BLOG' },
     { id: 'contact', label: 'KONTAKT' }
   ];

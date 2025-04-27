@@ -4,7 +4,6 @@ export type SectionId =
   | 'about' 
   | 'services' 
   | 'pricing'
-  | 'testimonials'
   | 'portfolio' 
   | 'blog' 
   | 'contact';

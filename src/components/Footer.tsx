@@ -10,7 +10,7 @@ const Footer = () => {
     { Icon: Star, href: 'https://saskia-photographie.de', label: 'Website' },
     { Icon: Github, href: 'https://github.com/Rodriguez-Diego-web', label: 'GitHub' },
     { Icon: Linkedin, href: 'https://www.linkedin.com/in/kadir-diego-padin-rodriguez', label: 'LinkedIn' },
-    { Icon: Instagram, href: 'https://www.instagram.com/kadirdiego_/', label: 'Instagram' },
+    { Icon: Instagram, href: 'https://www.instagram.com/diego_rodriguez_digital/?next=%2F', label: 'Instagram' },
     { Icon: Mail, href: 'mailto:diego@rodriguez-digital.de', label: 'Email' }
   ];
 

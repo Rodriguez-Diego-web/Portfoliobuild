@@ -10,11 +10,12 @@ interface NavLinksProps {
 
 const NavLinks: React.FC<NavLinksProps> = ({ currentSection, onClick, isMobile }) => {
   const links = [
+    { to: 'hero' as SectionId, label: 'Home' },
     { to: 'about' as SectionId, label: 'About' },
+    { to: 'portfolio' as SectionId, label: 'Projects' },
     { to: 'services' as SectionId, label: 'Services' },
     { to: 'pricing' as SectionId, label: 'Preise' },
-    { to: 'testimonials' as SectionId, label: 'Referenzen' },
-    { to: 'portfolio' as SectionId, label: 'Projects' },
+    { to: 'blog' as SectionId, label: 'Blog' },
     { to: 'contact' as SectionId, label: 'Contact' }
   ];
 
