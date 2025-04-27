@@ -21,6 +21,17 @@
     box-sizing: border-box;
   }
 
+  /* Ausnahme für Wellen-Animation */
+  .hero-wave {
+    max-width: none !important;
+    overflow: visible !important;
+  }
+  
+  .hero-wave-container {
+    max-width: 100vw;
+    overflow: hidden !important;
+  }
+
   body {
     @apply antialiased bg-black dark:bg-black;
     touch-action: pan-y; /* Erlaubt nur vertikales Scrollen auf Touch-Geräten */
