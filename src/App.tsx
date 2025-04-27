@@ -14,9 +14,8 @@ import WaveTransition from './components/WaveTransition';
 import Blog from './components/Blog/Blog';
 import SEO from './components/SEO';
 import { logPageView } from './utils/analytics';
+import { SectionId } from './types';
 import './styles/terminal.css';
-
-type SectionId = 'hero' | 'about' | 'projects' | 'services' | 'pricing' | 'testimonials' | 'blog' | 'contact';
 
 function App() {
   const [currentSection, setCurrentSection] = useState<SectionId>('hero');
@@ -25,7 +24,7 @@ function App() {
   const sectionRefs = {
     hero: useRef<HTMLDivElement>(null),
     about: useRef<HTMLDivElement>(null),
-    projects: useRef<HTMLDivElement>(null),
+    portfolio: useRef<HTMLDivElement>(null),
     services: useRef<HTMLDivElement>(null),
     pricing: useRef<HTMLDivElement>(null),
     testimonials: useRef<HTMLDivElement>(null),
@@ -66,7 +65,7 @@ function App() {
           <WaveTransition />
           <TechStack />
           <div ref={sectionRefs.about}><About /></div>
-          <div ref={sectionRefs.projects}><Projects /></div>
+          <div ref={sectionRefs.portfolio}><Projects /></div>
           <div ref={sectionRefs.services}><Services /></div>
           
           {/* Erste CTA-Sektion vor Pricing */}

@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import ScrollReveal from './ScrollReveal';
 import { Box, Film, Code, Palette, Smartphone, Layers, Brain, PenTool } from 'lucide-react';

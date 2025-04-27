@@ -48,7 +48,7 @@ const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="fixed w-full z-50 bg-black">
-      <nav className="container mx-auto px-4 py-4">
+      <nav className="px-4 py-4 max-w-7xl mx-auto">
         <div className="flex items-center justify-between">
           <Link
             to="hero"

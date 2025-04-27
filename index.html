@@ -177,10 +177,15 @@
         width: 100%;
       }
       
-      /* Header-Navigation zentrieren */
+      /* Header-Navigation korrigieren - nicht zentrieren, sondern ausrichten */
       header nav {
+        display: block;
+      }
+      
+      /* Stelle sicher, dass die Navigationsleiste richtig ausgerichtet ist */
+      header nav .flex.items-center.justify-between {
         display: flex;
-        justify-content: center;
+        justify-content: space-between !important;
       }
     </style>
   </head>
