@@ -15,7 +15,6 @@ import Blog from './components/Blog/Blog';
 import SEO from './components/SEO';
 import { logPageView } from './utils/analytics';
 import { SectionId } from './types';
-import './styles/terminal.css';
 
 function App() {
   const [currentSection, setCurrentSection] = useState<SectionId>('hero');
