@@ -32,6 +32,19 @@ const Hero = () => {
           style={{ objectPosition: 'center center' }}
         />
       </div>
+      
+      {/* Hero Content */}
+      <div className="relative z-20 flex flex-col items-center justify-center h-full w-full px-4 text-white">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 text-center uppercase tracking-wider">
+          Build Future
+        </h1>
+        <p className="text-sm md:text-base lg:text-lg text-center max-w-xl mb-8">
+          ENGINEERING TOMORROW'S DIGITAL EXPERIENCES TODAY
+        </p>
+        <p className="text-xs md:text-sm text-center max-w-md opacity-80">
+          WE DON'T IMAGINE FUTURES — WE BUILD THEM
+        </p>
+      </div>
     </section>
   );
 };
