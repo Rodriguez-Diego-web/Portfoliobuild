@@ -52,16 +52,16 @@ function App() {
   };
 
   return (
-    <div className="dark overflow-hidden">
+    <div className="dark">
       {/* SEO Component with default values */}
       <SEO />
       
-      <div className="min-h-screen bg-black text-gray-100 overflow-hidden">
+      <div className="min-h-screen bg-black dark:bg-black text-gray-900 dark:text-gray-100 transition-colors duration-300" onClick={(e) => e.stopPropagation()}>
         <Header 
           onNavigate={scrollToSection}
           currentSection={currentSection}
         />
-        <main className="overflow-hidden">
+        <main onClick={(e) => e.stopPropagation()}>
           <div ref={sectionRefs.hero}><Hero /></div>
           <WaveTransition />
           <TechStack />

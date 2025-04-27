@@ -150,6 +150,39 @@
     
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <link rel="canonical" href="https://rodriguez-digital.de/" />
+    <style>
+      html, body, #root {
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+        background-color: #000;
+      }
+      
+      /* Verbesserte Zentrierung für alle Container */
+      .container, [class*="container"], main > div, section {
+        margin-left: auto !important;
+        margin-right: auto !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      /* Spezifische Zentrierung für Inhalts-Elemente */
+      main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+      
+      /* Header-Navigation zentrieren */
+      header nav {
+        display: flex;
+        justify-content: center;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>

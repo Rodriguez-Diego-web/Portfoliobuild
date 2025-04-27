@@ -184,8 +184,8 @@ const TechStack = () => {
     : technologies.filter(tech => tech.category === selectedCategory);
 
   return (
-    <section id="skills" className="py-20 bg-black text-white overflow-hidden">
-      <div className="container mx-auto px-6 md:px-10 lg:px-12 max-w-6xl">
+    <section id="skills" className="py-20 bg-black text-white">
+      <div className="container mx-auto px-6">
         <div className="mb-12 text-center">
           <h2 className="text-5xl font-bold mb-6 text-accent-400">Tech Stack</h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-10">
@@ -211,7 +211,7 @@ const TechStack = () => {
         </div>
 
         {/* Technologie-Karten */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {filteredTechnologies.map((tech) => (
             <div
               key={tech.name}
