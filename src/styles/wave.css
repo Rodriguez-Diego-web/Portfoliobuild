@@ -1,6 +1,6 @@
 @keyframes wave-animation {
   0% { transform: translateX(0); }
-  50% { transform: translateX(-15%); }
+  50% { transform: translateX(-25%); }
   100% { transform: translateX(0); }
 }
 
@@ -15,14 +15,15 @@
   z-index: 10;
   line-height: 0;
   pointer-events: none;
+  overflow: hidden;
 }
 
 .hero-wave {
   /* Welle über volle Breite */
-  width: 400% !important;
+  width: 500% !important;
   height: 120px;
   position: absolute;
   bottom: 0;
-  left: -150%;
+  left: -200%;
   animation: wave-animation 15s ease-in-out infinite;
 }
