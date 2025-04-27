@@ -1,17 +1,17 @@
 @keyframes wave-animation {
   0% { transform: translateX(0); }
-  50% { transform: translateX(-25%); }
+  50% { transform: translateX(-30%); }
   100% { transform: translateX(0); }
 }
 
 .hero-wave-container {
   /* Position immer sichtbar machen */
-  position: absolute; 
-  left: 0;
-  right: 0;
+  position: absolute;
+  left: -10%;
+  right: -10%;
   bottom: 0;
-  width: 100%;
-  height: 120px;
+  width: 120%;
+  height: 140px;
   z-index: 10;
   line-height: 0;
   pointer-events: none;
@@ -19,11 +19,11 @@
 }
 
 .hero-wave {
-  /* Welle über volle Breite */
-  width: 500% !important;
-  height: 120px;
+  /* Welle über volle Breite - sehr viel breiter */
+  width: 800% !important;
+  height: 140px;
   position: absolute;
   bottom: 0;
-  left: -200%;
+  left: -350%;
   animation: wave-animation 15s ease-in-out infinite;
 }

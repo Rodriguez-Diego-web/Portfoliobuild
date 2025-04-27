@@ -1,8 +1,17 @@
 import { motion } from 'framer-motion';
+import '../styles/wave.css';
 
 const Hero = () => {
   return (
-    <section id="hero" className="relative w-full h-screen bg-black overflow-hidden flex flex-col justify-center items-center">
+    <section 
+      id="hero" 
+      className="relative h-screen bg-black overflow-hidden flex flex-col justify-center items-center"
+      style={{
+        width: '100vw',
+        marginLeft: 'calc(50% - 50vw)',
+        marginRight: 'calc(50% - 50vw)'
+      }}
+    >
       {/* Einfacher schwarzer Hintergrund ohne Gradient */}
       <div className="absolute inset-0 bg-black z-0"></div>
       
