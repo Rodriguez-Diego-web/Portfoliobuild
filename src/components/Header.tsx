@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { Link } from 'react-scroll';
+import { useState, useEffect } from 'react';
 import NavLinks from './NavLinks';
 import logo from '../assets/LOGO RODRIGUEZ_.png';
 import { SectionId } from '../types';
@@ -46,114 +45,126 @@ const Header: React.FC<HeaderProps> = ({
   ];
 
   return (
-    <header className="fixed w-full z-50 bg-black">
-      <nav className="px-4 py-4 max-w-7xl mx-auto">
-        <div className="flex items-center justify-between">
+    <>
+      {/* Normaler Header - immer sichtbar */}
+      <header className="fixed w-full z-50 bg-black">
+        <div style={{ padding: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          {/* Logo links */}
           <Link
             to="hero"
             spy={true}
             smooth={true}
             offset={-100}
             duration={500}
-            className="cursor-pointer"
+            style={{ cursor: 'pointer' }}
             onClick={() => handleNavigate('hero')}
           >
-            <img src={logo} alt="RODRIGUEZ PORTFOLIO" className="h-8" />
+            <img src={logo} alt="RODRIGUEZ PORTFOLIO" style={{ height: '32px' }} />
           </Link>
 
-          <div className="flex items-center">
+          {/* Navigation/Button rechts */}
+          <div>
             {/* Desktop Navigation */}
             <div className="hidden md:block">
               <NavLinks currentSection={currentSection} onClick={handleNavigate} />
             </div>
 
-            {/* Mobile Menu Toggle */}
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={() => setIsOpen(!isOpen)}
-              className="block md:hidden p-2 rounded-full bg-gray-800/50 text-white hover:bg-gray-700/50"
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsOpen(true)}
+              className="block md:hidden"
+              style={{ 
+                padding: '8px', 
+                borderRadius: '9999px', 
+                backgroundColor: 'rgba(31, 41, 55, 0.5)',
+                color: 'white'
+              }}
               aria-label="Toggle menu"
             >
               <Menu size={24} />
-            </motion.button>
+            </button>
           </div>
         </div>
+      </header>
 
-        {/* Fullscreen Mobile Menu - Minimalist Style */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-50 flex flex-col"
+      {/* Mobile Menu als absolut positioniertes Overlay */}
+      {isOpen && (
+        <div 
+          style={{ 
+            position: 'fixed', 
+            top: 0, 
+            left: 0, 
+            right: 0, 
+            bottom: 0, 
+            backgroundColor: 'black',
+            zIndex: 999,
+            display: 'flex',
+            flexDirection: 'column'
+          }}
+          className="md:hidden"
+        >
+          {/* Exakt gleicher Header wie oben - mit inline styles für exakte Positionierung */}
+          <div style={{ padding: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            {/* Logo links - exakt dieselbe Struktur wie im normalen Header */}
+            <Link
+              to="hero"
+              spy={true}
+              smooth={true}
+              offset={-100}
+              duration={500}
+              style={{ cursor: 'pointer' }}
+              onClick={() => handleNavigate('hero')}
+            >
+              <img src={logo} alt="RODRIGUEZ PORTFOLIO" style={{ height: '32px' }} />
+            </Link>
+            
+            {/* X-Button rechts - exakt dieselbe Größe und Position wie der Menu-Button */}
+            <button
+              onClick={() => setIsOpen(false)}
               style={{ 
-                backgroundColor: '#000000', 
-                background: '#000000',
+                padding: '8px', 
+                borderRadius: '9999px', 
+                backgroundColor: 'rgba(31, 41, 55, 0.5)',
                 color: 'white'
               }}
+              aria-label="Close menu"
             >
-              <div 
-                className="container mx-auto px-6 py-8 flex flex-col h-full" 
-                style={{ backgroundColor: '#000000', background: '#000000' }}
+              <X size={24} />
+            </button>
+          </div>
+          
+          {/* Navigation Links */}
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'center', 
+            justifyContent: 'center',
+            flexGrow: 1
+          }}>
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => handleNavigate(item.id)}
+                style={{ 
+                  fontSize: '1.875rem', 
+                  fontWeight: 'bold', 
+                  padding: '1rem 0',
+                  color: currentSection === item.id ? '#f97316' : 'white'
+                }}
               >
-                {/* Logo and Close Button */}
-                <div className="flex justify-between items-center mb-12" style={{ backgroundColor: '#000000' }}>
-                  <img src={logo} alt="RODRIGUEZ PORTFOLIO" className="h-8" />
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => setIsOpen(false)}
-                    className="text-white"
-                  >
-                    <X size={30} />
-                  </motion.button>
-                </div>
-                
-                {/* Navigation Links */}
-                <div className="flex flex-col items-center justify-center flex-grow" style={{ backgroundColor: '#000000' }}>
-                  {navItems.map((item) => (
-                    <motion.div
-                      key={item.id}
-                      initial={{ y: 20, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      exit={{ y: 20, opacity: 0 }}
-                      transition={{ delay: navItems.findIndex(nav => nav.id === item.id) * 0.1 }}
-                      className="mb-8"
-                      style={{ backgroundColor: '#000000' }}
-                    >
-                      <button
-                        onClick={() => handleNavigate(item.id)}
-                        className={`text-4xl font-bold ${
-                          currentSection === item.id 
-                            ? 'text-accent-400' 
-                            : 'text-white hover:text-accent-300'
-                        } transition-colors`}
-                        style={{ backgroundColor: '#000000' }}
-                      >
-                        {item.label}
-                      </button>
-                    </motion.div>
-                  ))}
-                </div>
-                
-                {/* Contact Info */}
-                <div className="text-center text-gray-400 text-sm mt-auto" style={{ backgroundColor: '#000000' }}>
-                  <a href="mailto:diego@rodriguez-digital.de" className="text-white hover:text-accent-400 transition-colors block">
-                    diego@rodriguez-digital.de
-                  </a>
-                  <a href="tel:+4915219377166" className="text-white hover:text-accent-400 transition-colors block mt-1">
-                    +49 152 193 77166
-                  </a>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
-    </header>
+                {item.label}
+              </button>
+            ))}
+          </div>
+          
+          {/* Kontaktdaten */}
+          <div style={{ textAlign: 'center', color: '#9ca3af', padding: '1rem' }}>
+            <div style={{ marginBottom: '0.5rem' }}>diego@rodriguez-digital.de</div>
+            <div>+49 152 193 77166</div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

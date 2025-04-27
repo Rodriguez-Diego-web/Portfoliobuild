@@ -3,18 +3,27 @@
 @tailwind utilities;
 
 @layer base {
+  /* Strengere Regeln gegen horizontales Scrollen */
   html, body, #root {
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden;
+    overflow-x: hidden !important;
     margin: 0;
     padding: 0;
     scroll-behavior: smooth;
     background-color: #000;
+    position: relative;
+  }
+
+  /* Zusätzliche Regel für alle Container mit voller Breite */
+  * {
+    max-width: 100vw;
+    box-sizing: border-box;
   }
 
   body {
     @apply antialiased bg-black dark:bg-black;
+    touch-action: pan-y; /* Erlaubt nur vertikales Scrollen auf Touch-Geräten */
   }
 }
 

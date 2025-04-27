@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { ArrowRight, Clock } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 
@@ -40,15 +39,34 @@ const CtaSection = ({
     }
   };
 
+  // Inline-Styles für volle Breite
+  const fullWidthStyle = {
+    width: '100vw',
+    marginLeft: 'calc(50% - 50vw)',
+    marginRight: 'calc(50% - 50vw)'
+  };
+
   return (
-    <section id="cta" className="relative py-16 overflow-hidden">
-      {/* Hintergrund, der über die volle Bildschirmbreite geht */}
-      <div className={`absolute inset-0 ${bgColor} w-screen left-[calc(50%-50vw)]`}></div>
+    <section id="cta" className="py-16 relative">
+      {/* Volle Breite mit inline Styles */}
+      <div
+        className={bgColor}
+        style={{
+          ...fullWidthStyle,
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          zIndex: 1
+        }}
+      >
+        {/* Decorative elements */}
+        <div className="absolute -left-16 -bottom-16 w-64 h-64 rounded-full bg-white/10 blur-3xl"></div>
+        <div className="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-white/10 blur-3xl"></div>
+      </div>
       
-      {/* Decorative elements */}
-      <div className="absolute -left-16 -bottom-16 w-64 h-64 rounded-full bg-white/10 blur-3xl"></div>
-      <div className="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-white/10 blur-3xl"></div>
-      
+      {/* Content container */}
       <div className="container mx-auto px-4 relative z-10">
         <ScrollReveal>
           <div className="max-w-4xl mx-auto text-center">
@@ -63,23 +81,17 @@ const CtaSection = ({
               </p>
             </div>
             
-            <p className="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
+            <p className="text-white/80 text-lg mb-8">
               {description}
             </p>
             
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-block"
+            <button
+              onClick={handleButtonClick}
+              className="bg-white hover:bg-gray-100 text-accent-600 font-semibold py-3 px-8 rounded-md inline-flex items-center transition-colors"
             >
-              <button
-                onClick={handleButtonClick}
-                className="cursor-pointer group bg-white hover:bg-gray-100 text-accent-600 px-8 py-4 rounded-lg font-medium text-lg inline-flex items-center shadow-lg transition-colors"
-              >
-                {buttonText}
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
-            </motion.div>
+              {buttonText}
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </button>
           </div>
         </ScrollReveal>
       </div>
