@@ -195,8 +195,8 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-white dark:bg-dark-200">
-      <div className="container mx-auto px-4">
+    <section id="contact" className="py-20 bg-white dark:bg-dark-200 w-full overflow-hidden">
+      <div className="w-full px-4 mx-0">
         <ScrollReveal>
           <h2 className="text-4xl font-bold mb-4 text-center gradient-text">Kontakt</h2>
           <p className="text-gray-600 dark:text-gray-400 text-center mb-12 max-w-2xl mx-auto">

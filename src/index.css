@@ -2,19 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Globale Regel, um horizontales Scrollen zu verhindern */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
   }
 
   body {
-    @apply antialiased bg-white dark:bg-black;
+    @apply antialiased bg-black dark:bg-black;
   }
 }
 
 @layer components {
+  /* Angepasste Container-Klasse mit zentriertem Inhalt */
   .container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
   .hero-gradient {
